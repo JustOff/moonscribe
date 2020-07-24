@@ -53,8 +53,12 @@ var networkObserver = {
         }
 
         var proxyChannel = subject.QueryInterface(Ci.nsIProxiedChannel);
+
+        if( !proxyChannel || !proxyChannel.proxyInfo || !proxyChannel.proxyInfo.host ) return;
+        if( proxyChannel.proxyInfo.host.indexOf("whiskergalaxy.com") === -1 ) return;
+
         // todo: add checking servers origin from pac-file
-        if (isProxied() || (!!proxyChannel.proxyInfo) || isExtraSecond()) {
+        if (isProxied() || isExtraSecond()) {
           if (storage.has('authCookie')) {
             var authCookie = storage.get('authCookie');
             channel.setRequestHeader('Proxy-Authorization', 'Basic ' + authCookie, false);

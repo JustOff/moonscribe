@@ -14,8 +14,8 @@ var settings = {
   ASSETS_ENDPOINT: 'https://assets.windscribe.com/',
   BACKUP_ASSETS_ENDPOINT: 'https://assets.staticnetcontent.com/',
   // default PAC endpoints should not have protocol in the beginning, it is stated in the PAC
-  DEFAULT_PAC_ENDPOINT: 'ext-start.windscribe.com',
-  BACKUP_DEFAULT_PAC_ENDPOINT: 'ext-start.staticnetcontent.com',
+  DEFAULT_PAC_ENDPOINT: 'nl-007.whiskergalaxy.com',
+  BACKUP_DEFAULT_PAC_ENDPOINT: 'nl-004.whiskergalaxy.com',
   SRVC: {
    'USERAGENTS': 'https://assets.windscribe.com/extension/useragents.txt',
    'EASYPRIVACY': 'https://assets.windscribe.com/extension/easyprivacy.txt',

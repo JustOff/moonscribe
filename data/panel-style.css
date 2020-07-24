@@ -270,16 +270,8 @@ a {
   line-height: 57px;
 }
 /* each section has differ offset */
-#slinks .title{
-  margin-left: 30px;
-}
-
 #locations .title{
   margin-left: 80px;
-}
-
-#slinks .title.context{
-  margin-left: 110px;
 }
 
 #menu .title{
@@ -409,36 +401,6 @@ a {
     font-weight: bold;
 }
 
-.secure-field{
-    background-blend-mode: overlay;
-    height: 175px;
-}
-
-
-.secureLinkHeader{
-    height: 44px;
-    margin-left: -15px;
-    margin-right: -15px;
-    background: rgba(255, 255, 255, 0.14);
-}
-
-.secureLinkHeader span{
-    width: 100%;
-    font-size: 15px;
-    font-weight: bold;
-    padding-left: 15px;
-    padding-right: 15px;
-    color: #FFFFFF;
-    height: 44px;
-    line-height: 44px;
-}
-
-.secureLinkHeader span{
-    font-size: 15px;
-    font-weight: bold;
-}
-
-
 .description{
     font-size: 12px;
     font-weight: normal;
@@ -448,43 +410,11 @@ a {
 }
 
 
-.secureLink {
-    background: none;
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 2px solid rgba(255,255,255, 0.29);
-    border-radius: 3px;
-    width: 320px;
-    opacity: 1;
-}
-
-.copyLink, .save_button{
-    width: 100%;
-    border-radius: 3px;
-    font-weight: normal;
-    font-size: 14px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.11);
-    background-color: #F9F9F9;
-    background-image: linear-gradient(180deg, #FFFFFF 0%,#EEEEEE 100%);
-    color: #3E7AC6;
-    cursor: pointer;
-    text-align: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.copyLink {
-
-}
-
-.copyLink, .copyLink-btn, .manageWhiteLists, .save_button {
+.copyLink-btn, .manageWhiteLists, .save_button {
         color: #3E7AC6;
 }
 
-.disabled .copyLink, .disabled .copyLink-btn, .disabled .manageWhiteLists, .disabled .save_button {
+.disabled .copyLink-btn, .disabled .manageWhiteLists, .disabled .save_button {
     color: #767676;
 }
 
@@ -537,64 +467,6 @@ a {
     margin-bottom: 5px;
 }
 
-#slinks .withlock_lock{
-    height: 14px;
-    width: 11px;
-    position: absolute;
-    top: 33px;
-    left: 10px;
-    right: 10px;
-}
-
-#slinks .withlock_lock:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    background: url(../assets/lock_2x.png) no-repeat left center;
-    background-size: 11px 14px;
-    opacity: 0.5;
-}
-
-
-#slinks .withmessage_message{
-    height: 12px;
-    width: 11px;
-    position: absolute;
-    top: 100px;
-    left: 10px;
-}
-
-#slinks .withmessage_message:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    background: url(../assets/message_2x.png) no-repeat left center;
-    background-size: 11px 12px;
-    opacity: 0.5;
-}
-
-#slinks hr{
-  color: rgba(219,219,219,0.5);
-  background-color: rgba(219,219,219,0.5);
-  margin-top: 0px;
-  margin-bottom: 0px;
-  border: none; 
-  height: 1px;
-}
-
-#slinks .bigtext{
-  font-size: 15px;
-  color: #FFFFFF;
-}
-
 .right_note{
   vertical-align: middle;
   text-align: right;
@@ -620,10 +492,6 @@ a {
     top: 5px;
     margin: 0 10px 5px 20px;
     opacity: 0.5;
-}
-
-#slinks .slink_switcher_region{
-    height: 58px;
 }
 
 .popup_close_icon{
@@ -1206,17 +1074,6 @@ a {
 
 .whiteList-region .child {
     margin-left: 0;
-}
-
-#copyLinkForm .secureLink{
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-.copyLink-container{
-    margin: 0 -15px 0 -15px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
 }
 
 .nonborder {

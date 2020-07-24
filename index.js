@@ -26,11 +26,9 @@ var { ToggleButton } = require('sdk/ui/button/toggle');
 var panels = require("sdk/panel");
 var events = require("sdk/system/events");
 var Windscribe = require('./src/windscribe.js');
-var SLinks     = require('./src/slinks.js');
 var clipboard = require("sdk/clipboard");
 var {doVersionCheck}          = require('./src/misc/versioner.js');
 var { stopSessionUpdate } = require('./src/misc/sessionupdate.js');
-var cm = require("sdk/context-menu");
 var prefService = require("sdk/preferences/service");
 var purgeStorage = require('./src/misc/purgeStorage.js');
 require('./src/misc/loginDirect.js');
@@ -163,42 +161,6 @@ var initUI = function () {
 };
 
 
-var initContextMenu = function (panel, button, slinks) {
-// it is possible remove context menu item depending on conditions
-// but there is no way to change data arguments of state of the script
-// so recreate sounds good alternative
-// still not needed yet
-  var cmItem = cm.Item({
-    label: "Copy Secure.link",
-    //context: cm.SelectorContext("a[href]"),
-    //context: cm.URLContext(new MatchPattern("http://*")),
-    contentScriptFile: self.data.url("contextmenu.js"),
-    image: self.data.url("icons/16x16_on.png"),
-    onMessage: function () {
-      if(hasActiveSession() && !(registry.has('restart_required'))){
-        var url = getCurrentUrl();
-        slinks.create(url, function(data){
-          if(data.success){
-            // important: first dom-tree ready, than this handler execute
-            // have no idea why, but this works this way
-            clipboard.set(data.data.secure_url);
-            panel.port.emit('slinks_ready', data.data);
-            panel.show({
-              position: button,
-              width: width,
-              height: height
-            });
-          } else {
-            reportMessage('Invalid page URL');
-          }
-        });
-      }
-    }
-  });
-
-};
-
-
 var initModules = function (panel, loadReason) {
   // these modules depends on 'panel'
   registry.register('panel', panel);
@@ -213,8 +175,6 @@ var initModules = function (panel, loadReason) {
 
 
   var windscribe = new Windscribe(panel);
-  var slinks = new SLinks();
-  slinks.bindListeners(panel);
 
   // setInterval(function () {
   //   panel.port.emit('main_traffic_ends');
@@ -222,19 +182,18 @@ var initModules = function (panel, loadReason) {
 
 
   registerNetworkListener();
-  return {windscribe, slinks};
+  return {windscribe};
 };
 
 exports.main = function({ loadReason }) {
   setTimeout(function () {
     doPreInit(loadReason);
 
-    var {panel, button} = initUI();
+    var {panel} = initUI();
 
     // log messages from HTML UI thread
     panel.port.on('log', function(mess){ console.log(mess); });
-    let {slinks} = initModules(panel, loadReason);
-    initContextMenu(panel, button, slinks);
+    initModules(panel, loadReason);
 
     // switcher val is false initially
     registry.register('proxy_state_remember', 'Off');

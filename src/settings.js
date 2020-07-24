@@ -6,7 +6,6 @@ var settings = {
   LNK:{
     LNK_MY_ACC: 'https://windscribe.com/myaccount?ext_session={SESSION_PLACEHOLDER}',
     LNK_HLP: 'https://windscribe.com/help',
-    LNK_SEC_LINK_HLP: 'https://windscribe.com/securelink',
     LNK_UPGRD: 'https://windscribe.com/upgrade',
     LNK_PSSWRD_FRGT: 'https://windscribe.com/forgotpassword',
     LNK_FRSTRUN: 'https://windscribe.com/installed/extension?user_id={user_id}'
@@ -19,9 +18,7 @@ var settings = {
   },
   EXTRHDRS: [
     new RegExp('^.*\\.windscribe\\.com$', 'i'),
-    new RegExp('^windscribe\\.com$', 'i'),
-    new RegExp('^.*\\.secure\\.link$', 'i'),
-    new RegExp('^secure\\.link$', 'i')
+    new RegExp('^windscribe\\.com$', 'i')
   ],
   EXTERNAL_LOGIN_LOCATION_REGEXP: /https:\/\/(.*)windscribe\.com\/myaccount\?hello/,
 
@@ -63,7 +60,7 @@ var settings = {
     "_somaliland.png", "_south-ossetia.png", "_united-nations.png", "_unknown.png", "_wales.png"
   ],
   "whitelistschemes": "about chrome file irc moz-safe-about news resource snews x-jsd addbook cid imap mailbox nntp pop data javascript moz-icon",
-  "whitelistDefault": [{url:"windscribe.com"}, {url:"secure.link"}],
+  "whitelistDefault": [{url:"windscribe.com"}],
   "slinks_protocols": ['http', 'https', 'mailbox', 'imap', 'news', 'snews'],
   "data_directory": "windscribe",
   "purge_storage_for_older_versions": false,

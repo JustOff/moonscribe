@@ -8,7 +8,6 @@ window.addEventListener('load', function () {
 
   try{
     Ps.initialize(gE('#scrolledLocations'));
-    Ps.initialize(gE('#recent_links_list'));
     Ps.initialize(gE('#whiteList_links'));
   } catch (e){
     self.port.emit('log', 'error with scrollbar: '+ e.message);
@@ -66,7 +65,6 @@ try{
     self.port.on('url_changed', function(url){
       gE('#whiteList').removeAttribute("data-tooltip");
       // gE('#whiteList_btn').removeAttribute("data-tooltip");
-      gE('.secureLink').value = url;
       gE('#whiteList').setAttribute('data-site', url);
       gE('#whiteListBtnText').textContent = 'Whitelist it';
       self.port.emit('check_site_whitelisted', url);
@@ -95,14 +93,7 @@ try{
           var url = gE('#whiteList').getAttribute('data-site');
           self.port.emit('check_site_whitelisted', url);
           break;
-        case 'slinks':
-          gE('#slink_passw').value = '';
-          gE('#slink_descr').value = '';
-          break;
         case 'locations':
-          break;
-        case 'recent_links':
-          self.port.emit('recent_links_update_ui');
           break;
         case 'white_list':
           if(opts.isSet()){
@@ -233,33 +224,6 @@ try{
       self.port.emit('click_on_main_location');
     });
 
-    gE('#copyLink').on('click', function(){
-      var url = ''+gE('#copyLinkForm input.secureLink').value;
-
-      if(url) {
-        var copyLink = gE('#copyLink');
-        var parser = document.createElement('a');
-        parser.href = url;
-        if(links_proto.includes(parser.protocol)){
-          self.port.emit('slinks_create', url);
-          copyLink.textContent = 'Saving...';
-          copyLink.removeAttribute("data-tooltip");
-        }
-        else {
-          copyLink.setAttribute('data-tooltip',
-              "Cannot make a Secure.link from this page");
-        }
-      }
-      return false;
-    });
-
-    self.port.on('slinks_ready', function(data){
-      gE('#copyLink').textContent = 'COPY SECURE.LINK';
-      if(data!==false){
-        switchSection('slinks', data);
-      }
-    });
-    
     gE('#applySwitcher').on('click', function(){
       if ( gE('#currentMode').textContent === 'External App' ) {
         gE('#currentMode').addClass('visibletooltip');
@@ -297,28 +261,6 @@ try{
         gE('#status').textContent = 'Disconnected'.toUpperCase();
       }
     });
-    
-    gE('#slink_save').on('click', function(e){
-      if(opts.isSet()){
-        try{
-          var linkData = opts.get();
-          var passw     = gE('#slink_passw').value;
-          var descr     = gE('#slink_descr').value;
-          var isInstall = gE('#slinks_force_install').checked;
-          self.port.emit('slinks_update', { 
-            id: linkData.secure_link_display_id,
-            passw:passw, descr:descr, isInstall:isInstall 
-          });
-          opts.reset();
-        } catch(e){
-          alert('error here: '+e)
-        }
-      } else {
-        // impossible situation
-        switchSection('main'); // anyway
-      }
-    });
-    
 
     self.port.on('locations_update_done', function(data, isPremium, current){
       gE('#locations_list').textContent = '';
@@ -458,196 +400,6 @@ try{
     gE('#currentMode').setAttribute('data-tooltip', data[1]);
   });
 
-  gE('#recent_links_menu').on('click', function(){
-     switchSection('recent_links');
-  });
-
-  self.port.on('recent_links_update_ui_done', function(links){
-    self.port.emit('log', 'update UI start, data:'+JSON.stringify(links));
-    gE('#recent_links_list').clear();
-    var todayList = [];
-    var yesterdayList = [];
-
-
-    var todayDate = new Date(); todayDate.setHours(0); todayDate.setMinutes(0); todayDate.setSeconds(0); todayDate.setMilliseconds(0);
-    var today = todayDate.getTime()/1000;
-    var yesterday = today - (24 * 60 * 60);
-    var older = [];
-    for(var i = 0; i < links.length; i++){
-      if(links[i].created_timestamp>=today){
-        todayList.push(links[i]);
-      } else if(links[i].created_timestamp>=yesterday){
-        yesterdayList.push(links[i]);
-      } else /* links[i].date < beforeYesterday*/{
-        older.push(links[i]);
-      }
-    }
-
-    var headerTemplate = ['div', {'class':'sectionTitle item'}];
-
-    var generateSlinkElementTemplate = function({title, link, linkClass, linkImgDivs, id}){
-      return ['div', {'class':"item", id: 'recent_link_'+id}, [
-
-        ['div', {'class':"listItemSubRow"}, [
-          'span', {'class':"dimmed_white slink_title"}, title
-        ],[
-          'span', {'class':"right copyEl", 'data-link':link}, 'Copy'
-        ]],
-
-        ['div', {'class':"listItemSubRow"}, [
-          'span', {class:"dimmed_white "+linkClass}, linkImgDivs, [null, {}, link]
-        ], [
-          'span', {class:"right removeEl", 'data-id':id}, 'Remove'
-        ]]
-
-      ]];
-    };
-
-    /*
-<div id="recent_link_{id}" class="item">
-
-  <div class="listItemSubRow">
-    <span class="dimmed_white slink_title">{title}</span>
-    <span class="right copyEl" data-link="{link}">Copy</span>
-  </div>
-
-  <div class="listItemSubRow">
-    <span  class="dimmed_white {linkClass}">{linkImgDivs}{link}</span>
-    <span class="right removeEl" data-id="{id}">Remove</span>
-  </div>
-
-</div>
-      */
-
-    var appendSection = function(title, list){
-      if(list.length>0){
-        var headerTree = JSON.parse(JSON.stringify(headerTemplate));
-        headerTree.push(title);
-
-        var jsonSection = [headerTree]
-
-        for(var i=0; i<list.length; i++){
-          var element = list[i];
-
-          //noinspection JSUnresolvedVariable
-          var tmplOptions = {
-            id: element.secure_link_display_id,
-            title: (!!element.page_title)?element.page_title:'Page Title Unknown',
-            link: element.secure_url
-          };
-
-          var linkClass = '';
-          var linkImgDivs = [];
-          var iconCount = 0;
-          if(element.encrypted == '1'){
-            linkImgDivs.push(['div', {'class':'slinkEncrypted'}]);
-            iconCount++;
-          }
-          if(element.force_install == '1'){
-            linkImgDivs.push(['div', {'class':'slinkForce'}]);
-            iconCount++;
-          }
-          if(iconCount == 1){
-            linkClass += ' slinkOneIcon';
-          } else if(iconCount == 2){
-            linkClass += ' slinkTwoIcon';
-          }
-
-          tmplOptions.linkClass = linkClass;
-          tmplOptions.linkImgDivs = linkImgDivs;
-
-          var jsonEl = generateSlinkElementTemplate(tmplOptions);
-          jsonSection.push(jsonEl);
-        }
-        // self.port.emit('log', 'actualNode: '+JSON.stringify(jsonSection));
-        var actualNode = jsonToDOM(jsonSection, document, {});
-        gE('#recent_links_list').appendChild(actualNode);
-      }
-    };
-
-    appendSection('Today', todayList);
-    appendSection('Yesterday', yesterdayList);
-    appendSection('Older', older);
-
-
-    var normalizeItem = function(el){
-      if(ifHas(el, '.copyEl')){
-        gE(el, '.copyEl').textContent = 'Copy';
-      }
-
-      if(ifHas(el, '.removeEl')){
-        gE(el, '.removeEl').textContent = 'Remove';
-      }
-
-      var cssSelector = fullPath(el);
-
-      jss.set(cssSelector +' .slink_title', {
-        width: '275px'
-      });
-    };
-
-    gAll(gE('#recent_links_list'), '.copyEl').on('click', function (e) {
-      e = e || window.event;
-      var target = e.target || e.srcElement;
-      var link = target.getAttribute('data-link');
-      self.port.emit('recent_links_copy_link', link);
-
-      gAll('#recent_links_list > div').forEach(function(el){
-        normalizeItem(el);
-      });
-
-      // ff 35+
-      var parent = target.closest('.item');
-      var parentSelector = fullPath(parent);
-      jss.set(parentSelector+' .slink_title', {
-        width: '250px'
-      });
-
-
-      target.textContent = "Copied!";
-    });
-
-    gAll('#recent_links_list .removeEl').on('click', function (e) {
-      e = e || window.event;
-      var target = e.target || e.srcElement;
-      var id = target.getAttribute('data-id');
-
-      gAll('#recent_links_list > div').forEach(function(el){
-        normalizeItem(el);
-      });
-
-
-      // ff 35+
-      var parent = target.closest('.item');
-      var parentSelector = fullPath(parent);
-
-
-      //
-      gE(parentSelector+' .copyEl').textContent="Are you sure?";
-      jss.set(parentSelector+' .slink_title', {
-        width: '225px'
-      });
-      //
-      gE(parentSelector+' .removeEl').replaceChilds(jsonToDOM([
-        ['span', {'class':"yesButton"}, 'Yes'],
-        ['span', {'class':"noButton"}, 'No']
-      ], document, {}));
-
-      gE(parentSelector+' .yesButton').on('click', function(){
-        self.port.emit('recent_links_remove_link', id);
-      });
-
-      gE(parentSelector+' .noButton').on('click', function(){
-        gAll('#recent_links_list > div').forEach(function(el){
-          normalizeItem(el);
-        });
-      });
-    });
-
-    Ps.update(gE('#recent_links_list'));
-
-  });
-
 
     (function () {
 
@@ -781,9 +533,6 @@ try{
       });
       gE('#help_menu').on('click', function(){
         self.port.emit('open_new_url', lnkData.LNK_HLP);
-      });
-      gE('#menu_sl_help').on('click', function(){
-        self.port.emit('open_new_url', lnkData.LNK_SEC_LINK_HLP);
       });
 
       gE('#upgrade_menu').on('click', function(){

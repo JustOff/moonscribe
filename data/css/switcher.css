@@ -1,0 +1,110 @@
+.onoffswitch {
+    position: relative; width: 75px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.3); border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.1s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color:  rgba(255,255,255, 0.3); color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 20px; margin: 5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 41px;
+    border: 2px solid rgba(255,255,255,0.5); border-radius: 20px;
+    transition: all 0.1s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+.disabled .onoffswitch-inner:before {
+    background-color: #B2B2B2; color: #FFFFFF;
+}
+
+
+
+.withrefresh.onoffswitch{
+    width: 114px;
+}
+
+
+.onoffswitch-refresh{
+    border-left: 2px solid rgba(255,255,255, 0.2);
+    border-top: 2px solid rgba(255,255,255, 0.2);
+    border-bottom: 2px solid rgba(255,255,255, 0.2);
+    border-radius: 20px 0 0 20px;
+     display: inline-block;
+    vertical-align: top;
+    line-height: 30px;
+    height: 30px;
+    width: 51px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.onoffswitch-refresh img{
+    transition: opacity 0.5s linear;
+    opacity: 1;
+    top: 7px;
+    left: 12px;
+    position: relative;
+}
+
+.withrefresh .onoffswitch-label{
+    margin-left: 40px;
+}
+
+.onoffswitch .onoffswitch-clickable-refresh{
+    display: none;
+}
+.withrefresh.onoffswitch .onoffswitch-clickable-refresh{
+    position: absolute;
+    display: inline-block;
+    height: 32px;
+    width: 30px;
+    margin-top: -34px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+
+.masking {
+    display: none;
+    position: absolute;
+    background-image: url('../../assets/ajax-loader.gif');
+    height: 34px;
+    width: 74px;
+    z-index: 10000;
+    background-repeat: no-repeat;
+    background-position: 30px 10px;
+    background-color: rgba(255,255,255,.5);
+    top: 10px;
+    border-radius: 20px;
+}

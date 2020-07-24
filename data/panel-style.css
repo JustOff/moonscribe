@@ -1,0 +1,1273 @@
+    html, body, ul {
+    margin: 0;
+    padding: 0;
+    /* list-style: none; */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+p{
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.wait, .wait * {
+    cursor: wait !important;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.centred{
+  vertical-align: middle;
+  margin: 10px auto;
+  position: relative;
+} 
+
+.whiteline{
+   background: rgba(255, 255, 255, 0.14);
+}
+
+.mainfraim.disabled{
+    background-image: linear-gradient(135deg, #565656 0%, #828282 56%, #B7B9B9 100%) !important;
+}
+
+.auth-link {
+    float: right;
+    position: absolute;
+    top: 15px;
+    right: 0;
+}
+
+#login{
+  /* background-image: linear-gradient(-135deg, #444683 0%, #3e69A8 56%, #33A2CB 100%); */
+}
+#login-header{
+  display: flex;
+  font-size: 17px;
+}
+
+#login-header > div{
+  text-align: center;
+  vertical-align: middle;
+  flex: 1;
+  height: 39px;
+  /* padding-bottom: 4px; */
+  padding-top: 15px;
+  cursor: pointer;
+  color: #8AA0C3;
+  font-weight: 600;
+  background-color: #F4F6F9;
+  border-bottom: 2px solid #F4F6F9;
+}
+
+#login-header > div.active{
+  border-bottom: 2px solid #214C8D;
+  color: #214C8D;
+}
+
+/*  edited */
+.login-body {
+    background-color: rgba(255, 255, 255, 0.05);
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 30px;
+}
+
+#signup .login-body{
+    height: 245px;
+}
+
+#login .login-body{
+    height: 200px;
+}
+
+.login-header {
+    margin-bottom: 10px;
+}
+
+.login-body-wrapper {
+    width: 240px;
+    display: inline-block;
+}
+
+.login-body input {
+    width: 100%;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 0;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    padding-left: 20px;
+    color: white;
+}
+
+.login-body button {
+    padding-left: 20px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    border-radius: 5px;
+    border: 0;
+    height: 45px;
+    color: #486BA9;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.login-body input:hover, .login-body button:hover {
+    opacity: 0.7;
+}
+
+/* edited  end */
+
+#login-body-login{
+  width: 100%;
+}
+
+.login-body .login-error{
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    margin-top: -30px;
+    vertical-align: middle;
+    color: #D69898;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+::-moz-placeholder {  /* Firefox 19+ */
+   padding-left: 15px;
+   color: #FFFFFF;
+   font-size: 15px;
+   font-weight: 500;
+   /* opacity: 1 !important; */
+}
+.login-header-signup {
+    margin-bottom: 35px;
+}
+.login-header{
+    margin-bottom: 45px;
+}
+
+.login-body-signup-mailmessage-wrapper{
+  vertical-align: middle;
+  text-align: right;
+  width: 100%;
+  height: 30px;
+}
+
+.alternative_enter{
+    display: inline-block ;
+    vertical-align: middle;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+#login-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#login-footer-passw{
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+
+.mainfraim{
+    font-family: "Lato", sans-serif;
+    font-size: 100%;
+    width: 350px;
+    min-height: 386px;
+    color: white;
+    background-color: #3064AF;
+    margin: 0;
+    position: relative;
+    border: 2px white solid;
+    border-radius: 3px;
+}
+
+.mainframe-white{
+    background-color: #F5F6FA;
+    background-image: none;
+}
+
+#main{
+
+}
+.disablingDiv {
+    /* Do not display it on entry */
+    display: none;
+
+    /* Display it on the layer with index 1001.
+       Make sure this is the highest z-index value
+       used by layers on that page */
+    z-index: 1001;
+
+    /* make it cover the whole screen */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* make it white but fully transparent */
+    background-color: black;
+    opacity: 0.4;
+    filter: alpha(opacity=00);
+}
+
+
+.container {
+    margin: 0 15px;
+    position: relative;
+    display: block;
+}
+
+.top {
+    height: 57px;
+}
+
+.top .main-menu{
+    display: inline-block;
+    height: 57px;
+    border-right: 1px solid rgba(255, 255, 255, 0.29);
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.topNav {
+    margin-left: 15px;
+    height: 57px;
+    font-size: 15px;
+}
+
+.topNav .navBack{
+  display: inline-block;
+  height: 57px;
+  margin-left: -15px;
+  padding: 0;
+  line-height: 57px;
+  cursor: pointer;
+}
+
+.topNav .navBack img{
+  position: relative;
+  top: 3px;
+  margin-right: 15px;
+}
+
+.topNav .title{
+  display: inline-block;
+  line-height: 57px;
+}
+/* each section has differ offset */
+#slinks .title{
+  margin-left: 30px;
+}
+
+#locations .title{
+  margin-left: 80px;
+}
+
+#slinks .title.context{
+  margin-left: 110px;
+}
+
+#menu .title{
+    margin-left: 80px;
+}
+
+#recent_links .title{
+    margin-left: 60px;
+}
+
+#blocking_options .title{
+    margin-left: 55px;
+}
+
+.top img {
+    padding-right: 15px;
+    line-height: 57px;
+    margin-top: 20px;
+}
+
+.top > * {
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.top span {
+    margin-left: 15px;
+    line-height: 57px;
+}
+
+.statusBlock {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    background-blend-mode: overlay;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.statusBlock > * {
+    vertical-align: middle;
+    line-height: normal;
+}
+
+#currentConnectionMain{
+    margin-top: -5px;
+}
+
+.statusBlock .statusContainer {
+    margin-top: -30px;
+    opacity: 1;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    border-radius: 3px;
+    width: 200px;
+    height: 34px;
+    cursor: pointer;
+}
+
+.statusBlock .setStatusContainer {
+    margin-top: 5px;
+}
+
+.statusBlock .statusContainer p{
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: auto;
+    position: absolute;
+    opacity: 0.29;
+}
+
+
+.status {
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    padding:0 8px;
+}
+
+#main .currentConnection{
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 34px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.arrow-right{
+    position: relative;
+    display: inline-block;
+    float: right;
+    padding-right: 15px;
+    top: 5px;
+}
+
+.arrow-right img{
+    margin-top: 15px;
+}
+
+.child {
+    display: inline-block;
+    /*width: 200px;
+    height: 100px;*/
+    margin-left: 15px;
+}
+
+#apply{
+  cursor: pointer;
+}
+
+
+.statusBlock .currentModeContainer{
+    margin-top: -20px;
+    position: absolute;
+}
+
+.currentModeLabel{
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.5;
+}
+
+
+.currentMode{
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+.secure-field{
+    background-blend-mode: overlay;
+    height: 175px;
+}
+
+
+.secureLinkHeader{
+    height: 44px;
+    margin-left: -15px;
+    margin-right: -15px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.secureLinkHeader span{
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #FFFFFF;
+    height: 44px;
+    line-height: 44px;
+}
+
+.secureLinkHeader span{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.description{
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    opacity: 0.8;
+}
+
+
+.secureLink {
+    background: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255,255,255, 0.29);
+    border-radius: 3px;
+    width: 320px;
+    opacity: 1;
+}
+
+.copyLink, .save_button{
+    width: 100%;
+    border-radius: 3px;
+    font-weight: normal;
+    font-size: 14px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.11);
+    background-color: #F9F9F9;
+    background-image: linear-gradient(180deg, #FFFFFF 0%,#EEEEEE 100%);
+    color: #3E7AC6;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.copyLink {
+
+}
+
+.copyLink, .copyLink-btn, .manageWhiteLists, .save_button {
+        color: #3E7AC6;
+}
+
+.disabled .copyLink, .disabled .copyLink-btn, .disabled .manageWhiteLists, .disabled .save_button {
+    color: #767676;
+}
+
+
+.table{
+  display: table; 
+  width:100%;
+}
+
+#link_message{
+  height: 25px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  display: table-cell;
+  line-height: 35px;
+  width: 100%;
+}
+
+#slink_passw, #slink_descr{
+    background: transparent;
+    width: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    border-radius: 3px;
+    height: 50px;
+    margin-top: 15px;
+    padding-left: 25px;
+    font-size: 14px;
+    color: #FFFFFF;
+    position: relative;
+}
+.disabled #slink_passw, .disabled #slink_descr{
+    border-color: #8f8f8f;
+}
+
+.slink_title{
+    display: inline-block;
+    width: 275px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.slink-note {
+    font-size: 11px;
+    position: relative;
+    text-align: end;
+    margin-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#slinks .withlock_lock{
+    height: 14px;
+    width: 11px;
+    position: absolute;
+    top: 33px;
+    left: 10px;
+    right: 10px;
+}
+
+#slinks .withlock_lock:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: url(../assets/lock_2x.png) no-repeat left center;
+    background-size: 11px 14px;
+    opacity: 0.5;
+}
+
+
+#slinks .withmessage_message{
+    height: 12px;
+    width: 11px;
+    position: absolute;
+    top: 100px;
+    left: 10px;
+}
+
+#slinks .withmessage_message:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: url(../assets/message_2x.png) no-repeat left center;
+    background-size: 11px 12px;
+    opacity: 0.5;
+}
+
+#slinks hr{
+  color: rgba(219,219,219,0.5);
+  background-color: rgba(219,219,219,0.5);
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: none; 
+  height: 1px;
+}
+
+#slinks .bigtext{
+  font-size: 15px;
+  color: #FFFFFF;
+}
+
+.right_note{
+  vertical-align: middle;
+  text-align: right;
+  width: 96%;
+  color: #BECAE0;
+  margin-top: 12px;
+  margin-bottom: 13px;
+}
+
+.disabled .right_note{
+    color: #c9c9c9;
+}
+
+.stick_right{
+  margin-left: 135px;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+}
+
+.instal_link_icon{
+    position: relative;
+    top: 5px;
+    margin: 0 10px 5px 20px;
+    opacity: 0.5;
+}
+
+#slinks .slink_switcher_region{
+    height: 58px;
+}
+
+.popup_close_icon{
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+}
+.popup_close_icon:hover{
+  /* cool */
+   filter: contrast(160%);
+}
+
+
+#locations > .optionsList, #recent_links > .optionsList{
+    height: 328px;
+    overflow: hidden;
+    position: relative;
+}
+.locationFlag{
+    margin-right: 10px; position: relative;top: 8px;
+}
+
+.inactiveLocation .locationFlag{
+    opacity: 0.25;
+    cursor: pointer;
+}
+
+/* allow scrolling only to 1th lvl item */
+.optionsList div.item{
+  background-color: rgba(255, 255, 255, 0.05);
+  font-weight: normal;
+  font-size: 14px;
+  min-height: 54px;
+  line-height: 54px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+
+#locations .optionsList div.item:hover, #menu .optionsList div.item:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    background-blend-mode: overlay;
+}
+
+.vertical-center {
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.optionsList div.item span{
+    font-weight: normal;
+}
+
+.optionsList div.item.inactiveLocation{
+    color: rgba(255, 255, 255, 0.25);
+    cursor: not-allowed;
+}
+
+.optionsList div.item+div.item{
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.optionsList div.onlyItem{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
+
+#recent_links .optionsList div.item{
+    cursor: default;
+}
+
+
+.optionsList div.sectionTitle.item{
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: default;
+}
+
+.bordered {
+    border: 1px solid red;
+}
+
+.right{
+    float: right;
+}
+
+.dimmed_white{
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    display:inline-block;
+    width: 250px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+
+.copyEl{
+    cursor: pointer;
+}
+
+.removeEl{
+    cursor: pointer;
+}
+
+.yesButton{
+    margin-right: 10px;
+}
+
+.listItemSubRow{
+    height: 25px;
+    margin: 0;
+    line-height: 25px;
+}
+
+
+.updateButton {
+    display: inline-block;
+    height: 57px;
+    border-right: 1px solid rgba(255, 255, 255, 0.29);
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.userStatus{
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    height: 30px;
+    width: 95px;
+    border-radius: 30px;
+    float: right;
+    top: 10px;
+    right: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.userStatusImg {
+    position: absolute;
+    top: -14px;
+    right: 74px;
+    height: 18px;
+    width: 18px;
+}
+
+.userStatusUpgrade {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    height: 30px;
+    width: 100px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #567AB9;
+    float: right;
+    font-weight: bold;
+    right : 15px;
+    top: 10px;
+}
+
+.userStatusUpgradeText {
+    font-weight: bold;
+    color: #fff;
+    margin-right: -15px;
+}
+
+.userStatusPro {
+    position: absolute;
+    padding: 3px 7px 5px 28px;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    border-radius: 30px;
+    cursor: pointer;
+    color: #567AB9;
+    float: right;
+    font-weight: bold;
+    right : 15px;
+    top: 10px;
+}
+
+.userStatusProText {
+    font-weight: bold;
+    color: #fff;
+    margin-top: -3px;
+    margin-right: 2px;
+}
+
+.userStatusDaysLeft {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    height: 30px;
+    width: 115px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #567AB9;
+    float: right;
+    font-weight: bold;
+    right : 15px;
+    top: 10px;
+}
+
+.userStatusDaysLeftText {
+    font-weight: bold;
+    color: #fff;
+    margin-right: -15px;
+}
+
+.userStatus.upgrade {
+    background-color: white;
+    color: #567AB9;
+    cursor: pointer;
+}
+#payment_status_wrapper.hidden{
+    display: none;
+}
+
+#payment_status_wrapper{
+    text-align: center;
+    cursor: pointer;
+}
+
+.userStatus-text{
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.star{
+    float: right;
+    position: relative;
+    top: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.iconContainer{
+    width: 100px;
+    display: inline-block;
+    height: 50px;
+    float: right;
+    clear: both;
+}
+
+
+.slinkEncrypted{
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    margin: 0;
+    line-height: 18px;
+    vertical-align: top;
+    /* border: 1px solid red; */
+}
+.slinkEncrypted:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: url(../assets/lock_2x.png) no-repeat left bottom;
+    background-size: 11px 14px;
+    opacity: 0.5;
+}
+
+.slinkForce{
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    margin: 0;
+    line-height: 18px;
+    vertical-align: top;
+    /* border: 1px solid red; */
+}
+
+.slinkForce:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: url(../assets/forceinstall_2x.png) no-repeat left bottom;
+    background-size: 11px 14px;
+    opacity: 0.5;
+}
+
+
+.cruise-control span {
+    font-weight: normal;
+}
+
+.loading-body{
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 240px;
+    padding-top: 40px;
+    text-align: center;
+}
+
+.loading-text{
+    font-weight: bold;
+    padding: 0 95px 0 95px;
+    margin-bottom: 60px;
+    font-size: 15px;
+}
+
+
+#lose_control, #restart_required, #auth_token_err_relogin{
+    color: #357AC0;
+    text-align: center;
+}
+
+.warningTriangle{
+    padding-top: 70px;
+    height: 45px;
+    width: 100%;
+    background: url(../assets/Update_blue_icon_2x.png) bottom center no-repeat;
+    background-size: 45px;
+}
+
+.warningMessage{
+    margin-top: 35px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.warningDetails{
+    margin-top: 17px;
+    font-size: 14px;
+    color: #357AC0;
+}
+
+.warningButton{
+    color: #F5F6FA;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #507FBD, #454D98);
+    cursor: pointer;
+    height: 45px;
+    line-height: 45px;
+    width: 225px;
+    margin: 35px auto 0;
+    font-size: 15px;
+}
+
+.question-mark {
+    float: right;
+    position: relative;
+    margin-right: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+#applySwitcher {
+    cursor: pointer;
+}
+
+
+
+#main-location-image {
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    top: -3px;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.options-item{
+    height: 50px;
+    padding: 4px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.options-note{
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 10px;
+}
+
+.right-block{
+    float: right;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+
+.left-block{
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.left-block:first-child {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+.user-agent-rotation{
+    cursor: pointer;
+}
+
+
+#login-body-login-subm, #login-body-signup-subm{
+    padding: 0;
+    cursor: pointer;
+    color: #3E7AC6;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.whiteList-region  {
+        margin-top: 15px;
+}
+
+.whiteListLabel {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.title-white-list {
+    position: relative;
+    left: 40px;
+}
+
+#whiteList {
+    font-size: 13px;
+    font-weight: bold;
+    float: right;
+    cursor: pointer;
+    width: auto;
+    position: relative;
+}
+
+#whiteListBtnText{
+    vertical-align: middle;
+    height: 30px;
+}
+
+.whiteList-region .child {
+        margin-left: 0;
+}
+
+.whiteListBtn {
+    display: inline-block;
+    margin-left: 5px !important;
+    position: relative;
+    top: -3px;
+}
+
+.whiteList-region{
+    margin-top: 15px;
+}
+
+.whiteList-region [data-tooltip]:before {
+    left: -10%;
+}
+
+.whitelist-options [data-tooltip]:before {
+    left: -10%;
+}
+
+.whiteList-item {
+    padding: 5px 0;
+    height: 25px;
+    font-weight: normal;
+    font-size: 14px;
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.whiteList-item-name {
+    opacity: 0.5;
+    position: relative;
+    left: 15px;
+    display:inline-block;
+    width: 250px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+.whiteList-item-remove {
+    float: right;
+    cursor: pointer;
+    position: relative;
+    right: 15px;
+}
+
+.manageWhiteLists {
+    padding: 5px;
+    font-weight: normal;
+    font-size: 14px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.11);
+    background-color: white;
+    color: #3E7AC6;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    cursor: pointer;
+    top: -40px;
+    position: relative;
+}
+
+.whiteListIndicator {
+    text-align: center;
+    height: 90px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.whiteListIndicatorBlue{
+    background-color: rgb(78, 161, 217);
+    color: #ffffff;
+}
+
+.copyLink-btn {
+    width: 320px;
+    height: 46px;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    font-weight: normal;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.11);
+    background-color: white;
+    color: #3E7AC6;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    margin-top: -25px;
+}
+
+.whiteListLabelHeader {
+    vertical-align: middle;
+    line-height: 55px;
+    font-size: 17px;
+    font-weight: bold
+}
+
+.whiteListReport{
+    text-decoration: underline;
+    font-size: smaller;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    left: 0;
+    cursor: pointer;
+    color: #c5c5c5;
+    font-size: 12px;
+}
+
+.white-list-legend {
+    margin-top: 50px;
+    padding-bottom: 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+}
+
+.whiteListLinks {
+    height: 130px;
+    overflow: hidden;
+    position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.circle {
+    border:2px solid white;
+    height:6px;
+    width: 6px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}
+
+.red-circle{
+    background-color:red;
+}
+
+.green-circle{
+    background-color: #1eb100;
+}
+
+.whiteList-region .child {
+    margin-left: 0;
+}
+
+#copyLinkForm .secureLink{
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.copyLink-container{
+    margin: 0 -15px 0 -15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nonborder {
+    border: none;
+}
+
+.whiteListOptionsBtns{
+    width: 45%;
+    font-size: 13px;
+    padding: 0 0 0 0;
+}
+
+#whiteListDetails div{
+    cursor: pointer;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+
+input[type="button"]{
+    outline:none;
+}
+input[type="button"]::-moz-focus-inner {
+    border: 0;
+}
+
+.whiteHighlight{
+    background-color:rgba(255, 255, 255, 0.3);
+}

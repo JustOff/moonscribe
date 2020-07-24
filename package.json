@@ -1,0 +1,16 @@
+{
+  "title": "Windscribe",
+  "name": "windscribeff",
+  "version": "0.1.60",
+  "description": "Windscribe helps you circumvent censorship, block ads, beacons and trackers on websites you use every day.",
+  "main": "index.js",
+  "author": "Windscribe",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "MIT",
+  "permissions": {
+    "unsafe-content-script": true,
+    "private-browsing": true
+  }
+}

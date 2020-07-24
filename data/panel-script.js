@@ -208,9 +208,6 @@ try{
             gE('#loading_message').textContent=opts.get();
           }
           break;
-        case 'blocking_options':
-          self.port.emit('update_blocking_options_status');
-          break;
       }
 
     };
@@ -490,12 +487,6 @@ try{
   gE('#recent_links_menu').on('click', function(){
      switchSection('recent_links');
   });
-
-  if(ifHas(document.body, '#blocking_options_menu')){
-    gE('#blocking_options_menu').on('click', function(){
-      switchSection('blocking_options');
-    });
-  }
 
   self.port.on('recent_links_update_ui_done', function(links){
     self.port.emit('log', 'update UI start, data:'+JSON.stringify(links));
@@ -903,102 +894,6 @@ try{
         self.port.emit('open_new_url', lnkData.LNK_PSSWRD_FRGT);
       });
 
-    });
-
-    self.port.on('switchUARotator', function (val) {
-      var el = gE('#splitPersonality');
-      el.__ignoreListener = true;
-      el.checked = val;
-      delete el.__ignoreListener;
-    });
-
-    gE('#splitPersonality').on('change', function () {
-      var el = gE('#splitPersonality');
-      self.port.emit('log', 'splitPersonality switched:'+el.checked+', __ignoreListener:'+el.__ignoreListener);
-      if(el.__ignoreListener){
-        return;
-      }
-      self.port.emit('switchUARotatorByUser', el.checked);
-    });
-
-    gE('#manualRotation').on('click', function (e) {
-      var data = {
-        platform: navigator.platform,
-        url: gE('#whiteList').getAttribute('data-site')
-      };
-      self.port.emit('switchUAManually', data);
-      var iconEl = gE('#rotateManualIcon img');
-      iconEl.style.transition =  'opacity 0.5s linear';
-      iconEl.style.opacity = 0;
-      setTimeout(function () {
-        iconEl.src =  '/data/css/checkmark2x.png';
-        iconEl.style.transition =  '';
-        iconEl.style.opacity = 1;
-      }, 500);
-
-      setTimeout(function () {
-        iconEl.style.transition =  'opacity 0.5s linear';
-        iconEl.style.opacity = 0;
-      }, 2500);
-
-      setTimeout(function () {
-        iconEl.src =  '/data/css/refresh2x.png';
-        iconEl.style.transition =  '';
-        iconEl.style.opacity = 1;
-      }, 3000);
-
-    });
-
-    var switch_masking = function (isMasked) {
-      return;
-      // ff find a way to deal with concurrent race even here
-       let newDisplay = isMasked?'block':'none';
-       gAll('#blocking-options .masking').forEach(function (el) {
-         el.style.display = newDisplay;
-       });
-    };
-
-    self.port.on('update_blocking_options_status_done', function ({antitrackerState, antisocialState, easyState}) {
-      gE('#untraceable').checked = !!antitrackerState;
-      gE('#anti-social').checked = !!antisocialState;
-      gE('#anti-ads').checked = !!easyState;
-
-      setTimeout(()=>{
-        switch_masking(false);
-      }, 0);
-    });
-
-    // const switchSocialEventName = 'fanboySwitch';
-    // const switchTrackerEventName = 'antitrackerSwitch';
-
-    gE('#untraceable').on('change', function (e) {
-      e = e || window.event;
-      var target = e.target || e.srcElement;
-      var newState = target.checked;
-      setTimeout(()=>{
-        switch_masking(true);
-      }, 0);
-      self.port.emit('antitrackerSwitch', newState);
-    });
-
-    gE('#anti-social').on('change', function (e) {
-      e = e || window.event;
-      var target = e.target || e.srcElement;
-      var newState = target.checked;
-      setTimeout(()=>{
-        switch_masking(true);
-      }, 0);
-      self.port.emit('fanboySwitch', newState);
-    });
-
-    gE('#anti-ads').on('change', function (e) {
-      e = e || window.event;
-      var target = e.target || e.srcElement;
-      var newState = target.checked;
-      setTimeout(()=>{
-        switch_masking(true);
-      }, 0);
-      self.port.emit('easySwitch', newState);
     });
 
   var addCurrentToAdsAndProxy = function () {

@@ -8,18 +8,6 @@ var self = require("sdk/self");
 var logger = new (require('./logger.js'))(['main']);
 
 
-var isRestartRequired = function (loadReason) {
-  if(loadReason == 'downgrade' || loadReason == 'upgrade'){
-    return true;
-  }
-  return false;
-};
-
-var showRestartDialogPrompt = function () {
-  registry.register('restart_required', true);
-  /// emitEvent('switch_section', 'restart_required');
-};
-
 var doVersionCheck = function (loadReason) {
   // extension version check
   logger.error('init with self.version:'+self.version+'('+typeof self.version+'), reason:'+loadReason);
@@ -29,11 +17,6 @@ var doVersionCheck = function (loadReason) {
       registry.resolve('purgeStorageOnLogOut')();
     }
     storage.set('version', self.version);
-  }
-
-  if(isRestartRequired(loadReason)){
-    console.log('restart required for any reason');
-    showRestartDialogPrompt();
   }
 
   if(storage.has('whitelist')){

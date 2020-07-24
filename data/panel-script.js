@@ -667,10 +667,6 @@ try{
 
   });
 
-  gE('#restart_now').on('click', function () {
-    self.port.emit('restart_now');
-  });
-
   function renderWhiteList(whiteList){
     if(whiteList){
       gE('#whiteList_links').textContent = '';

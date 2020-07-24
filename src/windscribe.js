@@ -292,11 +292,6 @@ var Windscribe = function (panel/* */) {
       }
 
       var titles = (function(){
-        if(registry.has('restart_required')){
-          registry.resolve('makeOnline')(registry.constants.icon.error);
-          return [' ', ' ']
-        }
-
           switch (storage.get('extensionMode')) {
               case 'doubleHop':
                   registry.resolve('makeOnline')(registry.constants.icon.doubleHop);
@@ -360,30 +355,8 @@ var Windscribe = function (panel/* */) {
       updateBlockingOptionsStatus();
     });
   
-  me.panel.port.on('restart_now', function () {
-      let canceled = Cc["@mozilla.org/supports-PRBool;1"].createInstance(Ci.nsISupportsPRBool);
-      Services.obs.notifyObservers(canceled, "quit-application-requested", "restart");
-      if (canceled.data) return false; // somebody canceled our quit request
-
-      // disable fastload cache?
-      if (prefService.get("disable_fastload")) {
-        Services.appinfo.invalidateCachesOnRestart();
-      }
-
-      // restart
-      Cc['@mozilla.org/toolkit/app-startup;1'].getService(Ci.nsIAppStartup)
-        .quit(Ci.nsIAppStartup.eAttemptQuit | Ci.nsIAppStartup.eRestart);
-
-      return true;
-  });
-
   me.panel.port.on('might_return_to_main', function () {
-    if(registry.has('restart_required')){
-      switchSection('restart_required');
-      registry.resolve('makeOnline')(registry.constants.icon.error);
-    } else {
-      switchSection('main');
-    }
+    switchSection('main');
   });
 
   logger.log('object creation fineee');

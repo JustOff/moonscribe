@@ -843,7 +843,7 @@ a {
 }
 
 
-#lose_control, #restart_required, #auth_token_err_relogin{
+#lose_control, #auth_token_err_relogin{
     color: #357AC0;
     text-align: center;
 }

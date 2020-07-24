@@ -67,12 +67,7 @@ var loginWithStoredCredentials = function (cleanRun) {
           sessionUpdateFunction();
         }
         registry.emitEvent('url_changed', getCurrentUrl());
-        if(registry.has('restart_required') && registry.resolve('restart_required') === true){
-          registry.resolve('makeOnline')(registry.constants.icon.error);
-          switchSection('restart_required');
-        } else {
-          switchSection('main');
-        }
+        switchSection('main');
         return Promise.resolve();
       };
 

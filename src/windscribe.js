@@ -37,11 +37,7 @@ var Windscribe = function (panel/* */) {
     me.panel = panel;
 
     registry.onEvent('switchToDefaultScreen', function(message){
-      if(settings.register_via_site_only || storage.has('isNotFirstRun')){
-        switchSection('login', {message:message});
-      } else {
-        switchSection('signup', {message:message});
-      }
+      switchSection('login', {message:message});
     });
 
     /* bind UI events */
@@ -146,7 +142,6 @@ var Windscribe = function (panel/* */) {
       }
       me.panel.port.emit('flags', settings.KNOWN_FLAGS);
       me.panel.port.emit('link_data', settings.LNK);
-      me.panel.port.emit('setup_register_via_site_only', settings.register_via_site_only);
 
       if(registry.has('disable_PAC_due_to_1267000_bug') && (registry.resolve('disable_PAC_due_to_1267000_bug')===true)){
           console.log('emiting UI changes');

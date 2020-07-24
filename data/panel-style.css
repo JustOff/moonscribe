@@ -80,10 +80,6 @@ a {
     padding-top: 30px;
 }
 
-#signup .login-body{
-    height: 245px;
-}
-
 #login .login-body{
     height: 200px;
 }
@@ -157,13 +153,6 @@ a {
 }
 .login-header{
     margin-bottom: 45px;
-}
-
-.login-body-signup-mailmessage-wrapper{
-  vertical-align: middle;
-  text-align: right;
-  width: 100%;
-  height: 30px;
 }
 
 .alternative_enter{
@@ -1047,7 +1036,7 @@ a {
 }
 
 
-#login-body-login-subm, #login-body-signup-subm{
+#login-body-login-subm{
     padding: 0;
     cursor: pointer;
     color: #3E7AC6;

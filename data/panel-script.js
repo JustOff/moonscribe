@@ -173,7 +173,6 @@ try{
 
           }
           break;
-        case 'signup':
         case 'login':
           gAll('.mainfraim:not(.ignore-grey)').forEach(function (el) {
             el.removeClass('disabled');
@@ -183,10 +182,8 @@ try{
             var ops = opts.get();
             if(ops.message){
               gE('#login-body-login-errormess').textContent = ops.message;
-              gE('#login-body-signup-errormess').textContent = ops.message;
             } else {
               gE('#login-body-login-errormess').textContent = '';
-              gE('#login-body-signup-errormess').textContent = '';
             }
             if(ops.keep){
               break;
@@ -197,11 +194,6 @@ try{
 
           gE('#login-body-login-name').value = '';
           gE('#login-body-login-passw').value = '';
-
-
-          gE('#login-body-signup-name').value = '';
-          gE('#login-body-signup-passw').value = '';
-          gE('#login-body-signup-email').value = '';
           break;
         case 'loader':
           if(opts.isSet()){
@@ -221,27 +213,9 @@ try{
     self.port.on('update_ui', updateUI);
 
     gE('#login-header-signup').on('click', function () {
-      if(document.register_via_site_only){
-        self.port.emit("signup_via_site");
-      } else {
-        switchSection('signup');
-        gE('#login-body-login-errormess').textContent = '';
-        gE('#login-body-login-name').value = '';
-        gE('#login-body-login-passw').value = '';
-      }
-
+      self.port.emit("signup_via_site");
     });
 
-    gE('#login-header-login').on('click', function () {
-        switchSection('login');
-
-        gE('#login-body-signup-errormess').textContent = '';
-        gE('#login-body-signup-name').value = '';
-        gE('#login-body-signup-passw').value = '';
-        gE('#login-body-signup-email').value = '';
-    });
-
-    
     // menu activation
     gAll('.toMain').on('click', function(){
       switchSection('main');
@@ -303,7 +277,7 @@ try{
     
     self.port.on('proxy_status', function(status){
       let active = gE('.mainfraim:not(.hidden)');
-      if((active.id == 'login') || (active.id == 'signup')){
+      if( active.id == 'login' ){
         gAll('.mainfraim:not(.ignore-grey)').forEach(function (el) {
           el.removeClass('disabled');
         });
@@ -721,15 +695,6 @@ try{
             loginErrorMsg.setAttribute("hidden", "true");
           }, 2500);
         });
-        self.port.on('signup_error', function(message){
-          var signupErrorMsg =  gE('#login-body-signup-errormess');
-          signupErrorMsg.replaceChilds(jsonToDOM([null,{},"Please fill in all required fields"], document, {}));
-          if(message) signupErrorMsg.replaceChilds(jsonToDOM([null,{},message], document, {}));
-          signupErrorMsg.removeAttribute("hidden");
-          setTimeout(function(){
-            signupErrorMsg.setAttribute("hidden", "true");
-          }, 2500);
-        });
 
 
 
@@ -787,71 +752,6 @@ try{
           gE('#countrySelector').removeAttribute("data-tooltip");
         });
 
-
-        //signUp
-        gE('#login-body-signup-subm').on("click", function (e) {
-            e.preventDefault();
-            var name = gE('#login-body-signup-name').value;
-            var passw = gE('#login-body-signup-passw').value;
-            var email =  gE('#login-body-signup-email').value;
-            var emailRegExp = /\S+@\S+\.\S+/;
-            var loginRegExp = /^[a-z0-9]+$/i;
-
-            var registrationData = {
-                name: name.trim(),
-                passw: passw
-            };
-
-            var signupErrorMsg =  gE('#login-body-signup-errormess');
-
-            if(registrationData.name.length < 3){
-              signupErrorMsg.removeAttribute("hidden");
-              signupErrorMsg.textContent = "Username must be at least 3 characters";
-              setTimeout(function(){
-                signupErrorMsg.setAttribute("hidden", "true");
-              }, 2500);
-              return false;
-            }
-            if(registrationData.passw.length < 7){
-              signupErrorMsg.removeAttribute("hidden");
-              signupErrorMsg.textContent = "Password must be at least 7 characters";
-              setTimeout(function(){
-                signupErrorMsg.setAttribute("hidden", "true");
-              }, 2500);
-              return false;
-            }
-            if(registrationData.name && !loginRegExp.test(registrationData.name)){
-              signupErrorMsg.removeAttribute("hidden");
-              signupErrorMsg.textContent = "Login does not appear to be valid";
-              setTimeout(function(){
-                signupErrorMsg.setAttribute("hidden", "true");
-              }, 2500);
-              return false;
-            }
-
-            if(email)
-              registrationData.email = email.trim();
-
-            if(registrationData.email && !emailRegExp.test(registrationData.email)){
-              signupErrorMsg.removeAttribute("hidden");
-              signupErrorMsg.textContent = "Email does not appear to be valid";
-              setTimeout(function(){
-                signupErrorMsg.setAttribute("hidden", "true");
-              }, 2500);
-              return false;
-          }
-
-
-          if(registrationData.passw === "" || registrationData.name === ""){
-            signupErrorMsg.removeAttribute("hidden");
-            signupErrorMsg.textContent = "Please fill in all required fields";
-            setTimeout(function(){
-              signupErrorMsg.setAttribute("hidden", "true");
-            }, 2500);
-            return false;
-          }
-            self.port.emit('action_user_signUp', registrationData);
-        });
 
         //logout
         gE('#logout').on("click", function (e) {
@@ -1078,10 +978,6 @@ try{
 
     self.port.on('flags', function(flags){
       document.flags = flags;
-    });
-
-    self.port.on('setup_register_via_site_only', function (register_via_site_only) {
-      document.register_via_site_only = register_via_site_only;
     });
 
     self.port.on('disable_PAC_due_to_1267000_bug', function () {

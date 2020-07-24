@@ -66,7 +66,6 @@ var settings = {
   "whitelistDefault": [{url:"windscribe.com"}, {url:"secure.link"}],
   "slinks_protocols": ['http', 'https', 'mailbox', 'imap', 'news', 'snews'],
   "data_directory": "windscribe",
-  "register_via_site_only": true,
   "purge_storage_for_older_versions": false,
   "WS_GRP_MIN": 1,
   "WS_GRP_MAX": 100

@@ -77,24 +77,13 @@ var sessionUpdateFunction = function() {
             }
           } else {
             storage.set('failedUpdateSessionCounter', 0); // reset error counter
-            if(validResponceWithCredentials(response)){
-              var ext_username = res.data.ext_username;
-              var ext_password = res.data.ext_password;
-              storage.set('ext_username', ext_username);
-              storage.set('authCookie', base64.encode(ext_username + ":" + ext_password));
-            }
             saveTrafficStatus(res.data);
             handleTrafficStatus();
 
-            if ( res.data.our_ip && res.data.our_location ) {
-              storage.set('externalApp', true);
-              storage.set('ourLocationCode', res.data.our_location);
-              !storage.get('proxyBeforeOurLocation') && storage.set('proxyBeforeOurLocation', storage.get('proxy_state_must') || 'On')
-            } else {
-              storage.reset('externalApp');
+            const resetLocations = storage.get('locations_revision_number') !== res.data.loc_rev;
+            if ( resetLocations ) {
+              locationsUpdateFunction(true /*fetchFreshData*/)
             }
-
-            locationsUpdateFunction(res.data.our_location)
             registry.emitEvent('checkMode');
             
             storage.get('proxyBeforeOurLocation') && !res.data.our_ip && !res.data.our_location && registry.emitEvent('restoreAppAfterOurLocationLeft');

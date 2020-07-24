@@ -2,7 +2,7 @@ var registry = require('./../registry.js');
 var storage = require('./../storage.js');
 var logger = new (require('./logger.js'))(['auth']);
 var {turnOnProxy, turnOffProxy, isNoInternetErrorCode, getCurrentUrl, switchSection, queryPACFile, canBeEnabled, turnOnWithAuth, reportMessage, queryLocations, getEndpoint, getWithSessionedSigning, createTryablePromise, validResponceWithCredentials, reapplySameLocation} = require('./../common_helpers.js');
-var { startSessionUpdate, stopSessionUpdate } = require('./sessionupdate.js');
+var { startSessionUpdate, stopSessionUpdate, sessionUpdateFunction } = require('./sessionupdate.js');
 var {Request, TryBackupException} = require("./request.js");
 var base64 = require("sdk/base64");
 var settings = require('./../settings.js');
@@ -61,7 +61,11 @@ var loginWithStoredCredentials = function (cleanRun) {
 
       var handlerAfter = function () {
         if(debug) console.log("handle after");
-        startSessionUpdate();
+        if(storage.has('proxy_state_must') && storage.get('proxy_state_must') == "On") {
+          startSessionUpdate();
+        } else {
+          sessionUpdateFunction();
+        }
         registry.emitEvent('url_changed', getCurrentUrl());
         if(registry.has('restart_required') && registry.resolve('restart_required') === true){
           registry.resolve('makeOnline')(registry.constants.icon.error);

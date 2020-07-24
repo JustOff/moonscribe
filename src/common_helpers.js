@@ -3,6 +3,7 @@ var md5 = require('./md5.js').md5;
 var base64 = require("sdk/base64");
 var preferences = require("sdk/preferences/service");
 var {Request, TryBackupException} = require("./misc/request.js");
+var { startSessionUpdate, stopSessionUpdate } = require('./misc/sessionupdate.js');
 
 var storage = require('./storage.js');
 var settings = require('./settings.js');
@@ -143,6 +144,7 @@ try{
     };
 
     var turnOffProxy = function(panel, preserve){
+        stopSessionUpdate();
         registry.register('proxy_state_remember', "Off");
 
         var originalProxyState = parseInt(storage.get('proxy_state_original'), 10)
@@ -208,6 +210,7 @@ try{
     };
 
     var turnOnProxy = function(preserve){
+      startSessionUpdate();
       var WS_GRP = Math.floor(Math.random() * (settings.WS_GRP_MAX - settings.WS_GRP_MIN)) + settings.WS_GRP_MIN;
       var panel = registry.resolve('panel');
       logger.log('turnOnProxy OK');

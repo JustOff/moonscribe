@@ -16,7 +16,7 @@ var base64 = require("sdk/base64");
 
 
 var sessionUpdateInterval = settings.INTERVALS.SESSION_UPDATE;
-var sessionUpdateIntervalId;
+var sessionUpdateIntervalId, sessionUpdateScheduled = false;
 
 
 var locationsUpdateFunction = function (ourLocationCode) {
@@ -108,13 +108,19 @@ registry.onEvent('postGetSessionError', function(res){
 });
 
 var startSessionUpdate = function () {
-  sessionUpdateFunction();
-  sessionUpdateIntervalId = setInterval(sessionUpdateFunction, sessionUpdateInterval);
+  if (!sessionUpdateScheduled) {
+    sessionUpdateFunction();
+    sessionUpdateIntervalId = setInterval(sessionUpdateFunction, sessionUpdateInterval);
+    sessionUpdateScheduled = true;
+  }
 };
 
 var stopSessionUpdate = function () {
-  logger.log('clearInterval(sessionUpdateIntervalId)');
-  clearInterval(sessionUpdateIntervalId);
+  if (sessionUpdateScheduled) {
+    logger.log('clearInterval(sessionUpdateIntervalId)');
+    clearInterval(sessionUpdateIntervalId);
+    sessionUpdateScheduled = false;
+  }
 };
 
 

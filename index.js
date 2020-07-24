@@ -39,7 +39,7 @@ const { sessionUpdateFunction } = require('./src/misc/sessionupdate');
 var settings = require('./src/settings.js');
 var isMac = (myplatform === 'Macintosh');
 var width = isMac?355:354;
-var height = isMac?392:390;
+var height = isMac?337:335;
 
 
 var doPreInit = function(loadReason){

@@ -216,7 +216,7 @@ exports.onUnload = function (reason) {
     } else {
       try{
         var panel = registry.resolve('panel');
-        turnOffProxy(panel);
+        turnOffProxy(panel, false /* change state */, true /* call from onUnload */);
       } catch (e){ console.log('turningOffProxy error ', e)}
     }
     unregisterNetworkListener();

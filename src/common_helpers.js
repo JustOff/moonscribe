@@ -143,7 +143,7 @@ try{
       return !!(registry.has('extraSecondOnTurnOff') && registry.resolve('extraSecondOnTurnOff') === true);
     };
 
-    var turnOffProxy = function(panel, preserve){
+    var turnOffProxy = function(panel, preserve, onUnload){
         stopSessionUpdate();
         registry.register('proxy_state_remember', "Off");
 
@@ -156,6 +156,8 @@ try{
 
         storage.reset('proxy_autoconfig_url_original');
         storage.reset('WS_GRP');
+
+        if (onUnload) return;
 
         panel.port.emit('proxy_status', false);
         if(preserve){

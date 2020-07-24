@@ -3,7 +3,7 @@ var WL_REMOVED             = '0';
 var WL_ADDED               = '1';
 var WL_ADDED_PLUS_NO_PROXY = '2';
 var LNK_UPGRD = '';
-
+var LOG = false;
 
 window.addEventListener('load', function () {
 
@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
     Ps.initialize(gE('#scrolledLocations'));
     Ps.initialize(gE('#whiteList_links'));
   } catch (e){
-    self.port.emit('log', 'error with scrollbar: '+ e.message);
+    LOG && self.port.emit('log', 'error with scrollbar: '+ e.message);
   }
 
   function isObject(someObject){
@@ -83,7 +83,7 @@ try{
         el.addClass('hidden');
       });
       gE('body div#' + section).removeClass('hidden');
-      // self.port.emit('log', 'switch section to '+section+' called');
+      LOG && self.port.emit('log', 'switch section to '+section+' called');
       gE('body').removeClass('wait');
 
       switch(section){
@@ -127,7 +127,7 @@ try{
             var isWrongSite = (isCurWL === WL_WRONG_SITE);
 
             var mess = opts.get().mess;
-            self.port.emit('log', 'message is:'+mess+', state is:'+state);
+            LOG && self.port.emit('log', 'message is:'+mess+', state is:'+state);
             if(!mess){
               var messFromNode = gE('body').getAttribute('wl_mess');
               if(!!messFromNode){
@@ -601,10 +601,10 @@ try{
   //noinspection SpellCheckingInspection
   self.port.on('check_site_whitelisted_done', function (whitelisted) {
     if(!whitelisted){
-      self.port.emit('log', 'error here, please check calling function: '+(new Error()).stack);
+      LOG && self.port.emit('log', 'error here, please check calling function: '+(new Error()).stack);
       return;
     }
-    self.port.emit('log', 'data to show on UI: '+JSON.stringify(whitelisted));
+    LOG && self.port.emit('log', 'data to show on UI: '+JSON.stringify(whitelisted));
 
     if(whitelisted.valid){
       if(whitelisted.isWhiteListed){
@@ -620,7 +620,7 @@ try{
     if(whitelisted.valid){
       if(whitelisted.isWhiteListed){
         //noinspection SpellCheckingInspection
-        self.port.emit('log', 'check_site_whitelisted_done is whitelisted, showing that');
+        LOG && self.port.emit('log', 'check_site_whitelisted_done is whitelisted, showing that');
         gE('#whiteListBtnText').textContent = 'Remove from whitelist';
         gE('#whiteListBtnText').once('click', function () {
           var currentSite  = gE('#whiteList').getAttribute('data-site');

@@ -29,7 +29,7 @@ var showRestartDialogPrompt = function () {
 
 var doVersionCheck = function (loadReason) {
   // extension version check
-  logger.error(' init with self.version:'+self.version+'('+typeof self.version+'), reason:'+loadReason);
+  logger.error('init with self.version:'+self.version+'('+typeof self.version+'), reason:'+loadReason);
 
   if(storage.get('version') != self.version) {
     if(settings.purge_storage_for_older_versions) {
@@ -44,7 +44,7 @@ var doVersionCheck = function (loadReason) {
   }
 
   // browser version check
-  console.log(appInfo.platformVersion);
+  // console.log(appInfo.platformVersion);
   // no way to check minor version, like '47.0b1', we have only '47' so far,
   // checking chanel, in combination it will cover our case
   // might be at some moment this will prevent some beta users from using the proxy, when problem will be resolved, but no other way

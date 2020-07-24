@@ -4,6 +4,7 @@ var registry = require("../registry.js");
 var settings = require('../settings.js');
 var logger = new (require('./../misc/logger.js'))(['main']);
 var Whitelist = require('./whitelist.js');
+var OLD_PAC;
 
 try{
 
@@ -104,8 +105,11 @@ try{
             storage.setJSON('current_country', {code: code, name: name, country_code: country_code});
         }
 
+        if (PAC != OLD_PAC) {
+          console.log('Proxy config updated, location:', storage.getJSON('current_country').name);
+          OLD_PAC = PAC;
+        }
         storage.setJSON('PAC', PAC);
-        console.log('done_change_location')
     };
 
 } catch (e){

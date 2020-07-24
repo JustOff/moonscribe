@@ -26,7 +26,7 @@ module.exports = {
           storage.set('extensionMode', 'manual');
         }
       }
-      console.log('extensionMode', storage.get('extensionMode'), storage.get('externalApp') )
+      // console.log('extensionMode', storage.get('extensionMode'), storage.get('externalApp') )
       
       // registry.register('isDoubleHop', 'our_location' in data);
       registry.emitEvent('updateCurrentModeLabels');

@@ -122,14 +122,11 @@ var pingSessionAndMaybeGetDeviceId = function () {
   return new Promise(function (resolve, reject) {
     logger.log('pingSessionAndMaybeGetDeviceId so it is called');
     // should not be called twice
-    var data = getWithSessionedSigning({session_type_id: '2'});
-    if(storage.has('ext_username')){
-      data.device_id = storage.get('ext_username');
-    }
+    var data = getWithSessionedSigning({});
 
     // console.log('url:'+ getEndpoint("Session")+', data: '+JSON.stringify(data));
     Request({
-      url: getEndpoint("Session"),
+      url: getEndpoint("ServerCredentials"),
       content: data,
       onComplete: function (response) {
         if (isNoInternetErrorCode(response)) {
@@ -147,35 +144,20 @@ var pingSessionAndMaybeGetDeviceId = function () {
           if(resp.errorCode){
             return reject(response);
           } else {
-            var ext_username = response.json.data.ext_username;
-            if(!ext_username){
-              // device is ok
-              return resolve();
-            } else {
               if(validResponceWithCredentials(response)){
                 logger.log('good way device')
-                var res = response.json;
-                var ext_username = res.data.ext_username;
-                var ext_password = res.data.ext_password;
-                storage.set('ext_username', ext_username);
+                var ext_username = base64.decode(resp.data.username);
+                var ext_password = base64.decode(resp.data.password);
                 storage.set('authCookie', base64.encode(ext_username + ":" + ext_password));
                 return resolve();
               } else {
                 return reject(response);
               }
-            }
           }
         }
       }
     }).get();
   });
-
-  if(!storage.has('ext_username')){
-    logger.log('we need DeviceId, processing it');
-
-  } else {
-    return Promise.resolve();
-  }
 };
 
 

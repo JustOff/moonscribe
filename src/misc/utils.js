@@ -51,16 +51,16 @@ var validResponceWithCredentials = function (response) {
         return false;
     }
     var res = response.json;
-    if(('ext_username' in res.data) && ('ext_password' in res.data)){
+    if(('username' in res.data) && ('password' in res.data)){
         // other false values:
-        if(!res.data.ext_username){
+        if(!res.data.username){
             return false;
         }
-        if(!res.data.ext_password){
+        if(!res.data.password){
             return false;
         }
         // blank string
-        if(((''+res.data.ext_username).trim().length == 0 ) || ((''+res.data.ext_password).trim().length == 0 )){
+        if(((''+res.data.username).trim().length == 0 ) || ((''+res.data.password).trim().length == 0 )){
             return false;
         } else {
             return true;

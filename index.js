@@ -69,13 +69,13 @@ var initUI = function () {
 
  // todo: add debugger
   var button = ToggleButton({
-    id: "windscribe",
-    aId: "windscribe",
-    label: "Windscribe",
+    id: "moonscribe",
+    aId: "moonscribe",
+    label: "Moonscribe",
     icon: {
       "16": "./icons/16x16_off.png",
-      "32": "./icons/48x48_off.png",
-      "64": "./icons/128x128_on.png"
+      "32": "./icons/32x32_off.png",
+      "64": "./icons/64x64_off.png"
     },
     onChange: handleChange
   });
@@ -138,29 +138,29 @@ var initUI = function () {
       case registry.constants.icon.blue:
         button.icon = {
           "16": "./icons/16x16_on.png",
-          "32": "./icons/48x48_on.png",
-          "64": "./icons/128x128_on.png"
+          "32": "./icons/32x32_on.png",
+          "64": "./icons/64x64_on.png"
         };
         break;
       case registry.constants.icon.grey:
         button.icon = {
           "16": "./icons/16x16_off.png",
-          "32": "./icons/48x48_off.png",
-          "64": "./icons/128x128_off.png"
+          "32": "./icons/32x32_off.png",
+          "64": "./icons/64x64_off.png"
         };
         break;
       case registry.constants.icon.doubleHop:
         button.icon = {
-          "16": "./icons/38x38_on_doublehop.png",
-          "32": "./icons/48x48_on_doublehop.png",
-          "64": "./icons/128x128_on_doublehop.png"
+          "16": "./icons/32x32_on_doublehop.png",
+          "32": "./icons/32x32_on_doublehop.png",
+          "64": "./icons/64x64_on_doublehop.png"
         };
         break;
       case registry.constants.icon.error:
         button.icon = {
-          "16": "./icons/128x128_off.png",
-          "32": "./icons/128x128_off.png",
-          "64": "./icons/128x128_off.png"
+          "16": "./icons/16x16_off.png",
+          "32": "./icons/32x32_off.png",
+          "64": "./icons/64x64_off.png"
         };
         break;
     }

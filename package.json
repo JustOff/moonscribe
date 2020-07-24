@@ -1,14 +1,20 @@
 {
-  "title": "Windscribe",
-  "name": "windscribeff",
-  "version": "0.1.60",
-  "description": "Windscribe helps you circumvent censorship, block ads, beacons and trackers on websites you use every day.",
+  "title": "Moonscribe",
+  "id": "Moonscribe@Off.JustOff",
+  "name": "moonscribe",
+  "version": "1.0.1",
+  "description": "Unofficial Windscribe Proxy Client for Pale Moon",
+  "homepage": "https://github.com/JustOff/moonscribe",
   "main": "index.js",
-  "author": "Windscribe",
+  "author": "Off JustOff <Off.Just.Off@gmail.com>",
+  "contributors": [
+    "Windscribe"
+  ],
   "engines": {
-    "firefox": ">=38.0a1"
+    "{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}": ">=27.1.0b1 <=29.*",
+    "firefox": ">=38.0a1 <=56.*"
   },
-  "license": "MIT",
+  "license": "MPL 2.0",
   "permissions": {
     "unsafe-content-script": true,
     "private-browsing": true

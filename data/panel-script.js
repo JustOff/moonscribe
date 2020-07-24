@@ -253,6 +253,10 @@ try{
         gAll('.mainfraim:not(.ignore-grey)').forEach(function (el) {
           el.removeClass('disabled');
         });
+        if ( gE('#status').textContent != 'Connected'.toUpperCase() ) {
+          gE('#ipLinkData').textContent = 'Checking ...';
+          self.port.emit('check_ip');
+        }
         gE('#status').textContent = 'Connected'.toUpperCase();
       } else {
         gE('#applySwitcher').src='../assets/power_button_off_2x.png';
@@ -260,7 +264,12 @@ try{
           el.addClass('disabled');
         });
         gE('#status').textContent = 'Disconnected'.toUpperCase();
+        gE('#ipLinkData').textContent = '-';
       }
+    });
+
+    self.port.on('check_ip_done', function(ip){
+        gE('#ipLinkData').textContent = ip;
     });
 
     self.port.on('locations_update_done', function(data, isPremium, current){

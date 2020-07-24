@@ -122,6 +122,19 @@ module.exports = {
       panel.port.emit('check_site_whitelisted_done', {valid: true, isWhiteListed: whitelisted});
     });
 
+    panel.port.on('check_ip', function(){
+      Request({
+        url: "https://checkipv4.windscribe.com/",
+        onComplete: function (response) {
+          if(response.status !== 200) {
+            panel.port.emit('check_ip_done', "Unknown :-/");
+          } else {
+            panel.port.emit('check_ip_done', response.text);
+          }
+        }
+      }).get();
+    });
+
     registry.onEvent('url_changed', function(site){
       setTimeout(function () {
 

@@ -398,6 +398,31 @@ a {
     font-weight: bold;
 }
 
+.ip-field{
+    background-blend-mode: overlay;
+    height: 110px;
+}
+
+
+.ipLinkHeader{
+    height: 39px;
+    margin-left: -15px;
+    margin-right: -15px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.ipLinkHeader span{
+    width: 100%;
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #FFFFFF;
+    height: 44px;
+    line-height: 44px;
+}
+
+
 .description{
     font-size: 12px;
     font-weight: normal;
@@ -406,6 +431,19 @@ a {
     opacity: 0.8;
 }
 
+
+.ipLink {
+    background: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 2px solid rgba(255,255,255, 0.29);
+    border-radius: 3px;
+    text-align: center;
+    opacity: 1;
+}
 
 .copyLink-btn, .manageWhiteLists, .save_button {
         color: #3E7AC6;
@@ -1072,6 +1110,17 @@ a {
 
 .whiteList-region .child {
     margin-left: 0;
+}
+
+#ipLinkForm .ipLink{
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+.ipLink-container{
+    margin: 0 -15px 0 -15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .nonborder {

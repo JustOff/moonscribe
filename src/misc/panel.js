@@ -7,9 +7,10 @@ var loggerA = new (require('./logger.js'))(['blocker']);
 var loggerB = new (require('./logger.js'))(['whitelist']);
 var { setInterval, clearInterval, setTimeout } = require("sdk/timers");
 var {Request, TryBackupException} = require("./request.js");
-var {getEndpoint, getCurrentUrl, getWithSessionedSigning, isSupportedProtocol, isNoInternetErrorCode} = require('./../common_helpers.js');
+var {getEndpoint, getCurrentUrl, getWithSessionedSigning, isSupportedProtocol, isNoInternetErrorCode, turnOffProxy} = require('./../common_helpers.js');
 var Whitelist = require("./whitelist.js");
 
+var settings = require('./../settings.js');
 var registry = require('./../registry.js');
 var storage = require('./../storage.js');
 let Utils = require('./util.js').Utils;
@@ -124,10 +125,20 @@ module.exports = {
 
     panel.port.on('check_ip', function(){
       Request({
-        url: "https://checkipv4.windscribe.com/",
+        url: settings.CHECK_IPV4_URL,
         onComplete: function (response) {
           if(response.status !== 200) {
             panel.port.emit('check_ip_done', "Unknown :-/");
+            var req = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance();
+            req.open('GET', settings.CHECK_NOSSL_URL);
+            req.onerror = function(e) {
+              var status = req.channel.QueryInterface(Ci.nsIRequest).status;
+              if ((status & 0xff0000) === 0x5a0000) { // Security module
+                turnOffProxy(panel);
+                panel.port.emit('check_ip_done', "Proxy is down :-/");
+              }
+            };
+            req.send();
           } else {
             panel.port.emit('check_ip_done', response.text);
           }

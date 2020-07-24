@@ -13,6 +13,8 @@ var settings = {
   // default PAC endpoints should not have protocol in the beginning, it is stated in the PAC
   DEFAULT_PAC_ENDPOINT: 'nl-007.whiskergalaxy.com',
   BACKUP_DEFAULT_PAC_ENDPOINT: 'nl-004.whiskergalaxy.com',
+  CHECK_IPV4_URL: 'https://checkipv4.windscribe.com/',
+  CHECK_NOSSL_URL: 'http://nosslscribe.com/',
   INTERVALS:{
     SESSION_UPDATE: 60*1000
   },

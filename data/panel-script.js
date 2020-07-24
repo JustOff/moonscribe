@@ -741,10 +741,6 @@ try{
       document.flags = flags;
     });
 
-    self.port.on('disable_PAC_due_to_1267000_bug', function () {
-      gE('#set-statusContainer').setAttribute('data-tooltip', "proxy can not be enabled exactly in this version of firefox due to firefox bug that will cause browser crash");
-    });
-
 
 } catch(e){
   alert(e);

@@ -469,10 +469,6 @@ try{
 
 // sync, fast, no side effects
   var canBeEnabled = function(){
-    if(registry.has('disable_PAC_due_to_1267000_bug') && (registry.resolve('disable_PAC_due_to_1267000_bug')===true)){
-      return false;
-    }
-
     if(storage.has('status')){
       var status = storage.get('status');
       if((status != 0) && (status != 1)){

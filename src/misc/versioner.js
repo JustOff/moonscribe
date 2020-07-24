@@ -7,13 +7,6 @@ var self = require("sdk/self");
 
 var logger = new (require('./logger.js'))(['main']);
 
-// const { components, CC, Cc, Ci, Cr, Cu } = require("chrome");
-// var versionComparator = Cc["@mozilla.org/xpcom/version-comparator;1"].getService(Ci.nsIVersionComparator);
-// https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIVersionComparator
-
-var appInfo = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo); // no access to minor numbers, useless
-var xulRuntime = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULRuntime);
-
 
 var isRestartRequired = function (loadReason) {
   if(loadReason == 'downgrade' || loadReason == 'upgrade'){
@@ -41,17 +34,6 @@ var doVersionCheck = function (loadReason) {
   if(isRestartRequired(loadReason)){
     console.log('restart required for any reason');
     showRestartDialogPrompt();
-  }
-
-  // browser version check
-  // console.log(appInfo.platformVersion);
-  // no way to check minor version, like '47.0b1', we have only '47' so far,
-  // checking chanel, in combination it will cover our case
-  // might be at some moment this will prevent some beta users from using the proxy, when problem will be resolved, but no other way
-  // xulRuntime.defaultUpdateChannel == 'beta', see full list there: http://kb.mozillazine.org/App.update.channel
-  if(appInfo.platformVersion === '47.0' && xulRuntime.defaultUpdateChannel == 'beta'){
-    // hope it will be fixed in release
-    registry.register('disable_PAC_due_to_1267000_bug', true); // later time can be renamed
   }
 
   if(storage.has('whitelist')){

@@ -142,11 +142,6 @@ var Windscribe = function (panel/* */) {
       }
       me.panel.port.emit('flags', settings.KNOWN_FLAGS);
       me.panel.port.emit('link_data', settings.LNK);
-
-      if(registry.has('disable_PAC_due_to_1267000_bug') && (registry.resolve('disable_PAC_due_to_1267000_bug')===true)){
-          console.log('emiting UI changes');
-          me.panel.port.emit('disable_PAC_due_to_1267000_bug');
-      }
     });
 
     me.panel.port.on('signup_via_site', function () {

@@ -112,10 +112,6 @@ var loginWithStoredCredentials = function (cleanRun) {
         return turnOnIfCleanRun(cleanRun);
     });
 
-    flow = flow.then(function () {
-      registry.emitEvent('loadPrivacyOptions');
-    });
-
     flow.then(null, function (e) {
       console.log('ERROR: '+e);
     });

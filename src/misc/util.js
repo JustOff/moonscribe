@@ -1,6 +1,6 @@
 const { components, CC, Cc, Ci, Cr, Cu } = require("chrome");
 
-var logger = new (require('./../misc/logger.js'))(['blocker']);
+var logger = new (require('./logger.js'))(['blocker']);
 
 
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");

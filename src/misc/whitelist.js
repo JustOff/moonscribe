@@ -1,5 +1,5 @@
 var logger = new (require('./logger.js'))(['main']);
-var Utils = require('./../blocker/util.js').Utils;
+var Utils = require('./util.js').Utils;
 var storage = require('./../storage.js');
 var {reapplySameLocation} = require('./../common_helpers.js');
 var settings = require('../settings.js');

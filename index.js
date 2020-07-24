@@ -22,14 +22,12 @@ var {unregisterNetworkListener, registerNetworkListener} = require('./src/misc/n
 var { checkSecureLink, reportMessage, getCurrentUrl, turnOffProxy, hasActiveSession, setDefaultPac} = require('./src/common_helpers.js');
 var { setInterval, clearInterval, setTimeout } = require("sdk/timers");
 const { components, CC, Cc, Ci, Cr, Cu } = require("chrome");
-var pageMod = require("sdk/page-mod");
 var { ToggleButton } = require('sdk/ui/button/toggle');
 var panels = require("sdk/panel");
 var events = require("sdk/system/events");
 var Windscribe = require('./src/windscribe.js');
 var SLinks     = require('./src/slinks.js');
 var clipboard = require("sdk/clipboard");
-var uselessVariableThatDoesWork = require('./src/blocker/policy').forceload;
 var {doVersionCheck}          = require('./src/misc/versioner.js');
 var { stopSessionUpdate } = require('./src/misc/sessionupdate.js');
 var cm = require("sdk/context-menu");
@@ -62,11 +60,6 @@ var doPreInit = function(loadReason){
 
 
 var initUI = function () {
-  pageMod.PageMod({
-    include: "*",
-    contentScriptFile: "./uacontentscript.js"
-  });
-
  // todo: add debugger
   var button = ToggleButton({
     id: "moonscribe",
@@ -210,9 +203,7 @@ var initModules = function (panel, loadReason) {
   // these modules depends on 'panel'
   registry.register('panel', panel);
 
-  try{ require('./src/misc/uarotator.js').init(); } catch (e){ logger.error('error during init of src/misc/uarotator.js', e); }
-
-  try{ require('./src/blocker/index.js').init(); } catch (e){ logger.error('error during init of /src/blocker/popupFooter.js', e); }
+  try{ require('./src/misc/panel.js').init(); } catch (e){ logger.error('error during init of /src/misc/panel.js', e); }
 
   try{ require('./src/misc/firstRun.js').init(); } catch (e){ logger.error('error during init of /src/misc/firstRun.js', e); }
 
@@ -235,9 +226,6 @@ var initModules = function (panel, loadReason) {
 };
 
 exports.main = function({ loadReason }) {
-  if(uselessVariableThatDoesWork == uselessVariableThatDoesWork){
-    // then variable has equal value to itself value
-  }
   setTimeout(function () {
     doPreInit(loadReason);
 

@@ -22,7 +22,7 @@ var {getBrowserForTab, getTabForContentWindow, getTabForId} = require("sdk/tabs/
 var {Ci, Cu} = require("chrome");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm", this);
 
-let Utils = require('./blocker/util.js').Utils;
+let Utils = require('./misc/util.js').Utils;
 
 var panels = require("sdk/panel");
 

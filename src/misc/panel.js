@@ -3,44 +3,21 @@ var WL_REMOVED             = '0';
 var WL_ADDED               = '1';
 var WL_ADDED_PLUS_NO_PROXY = '2';
 
-let {registerNetworkPolicy, unregisterNetworkPolicy} = require('./policy.js');
-let {loadRuleEngine} = require('./ruleengine.js');
-var loggerA = new (require('./../misc/logger.js'))(['blocker']);
-var loggerB = new (require('./../misc/logger.js'))(['whitelist']);
+var loggerA = new (require('./logger.js'))(['blocker']);
+var loggerB = new (require('./logger.js'))(['whitelist']);
 var { setInterval, clearInterval, setTimeout } = require("sdk/timers");
-var {Request, TryBackupException} = require("./../misc/request.js");
+var {Request, TryBackupException} = require("./request.js");
 var {getEndpoint, getCurrentUrl, getWithSessionedSigning, isSupportedProtocol, isNoInternetErrorCode} = require('./../common_helpers.js');
-var Whitelist = require("./../misc/whitelist.js");
+var Whitelist = require("./whitelist.js");
 
 var registry = require('./../registry.js');
 var storage = require('./../storage.js');
 let Utils = require('./util.js').Utils;
-let HitChanel = require('./hitchanel.js')();
 const { Ci, Cu, Cc, Cr, components} = require('chrome');
 let {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
 
 module.exports = {
   init: function () {
-
-    registry.onEvent('loadPrivacyOptions', function(){
-      setTimeout(function () {
-        loggerA.log('Blocker starts');
-
-        var loadPromise = loadRuleEngine();
-        loadPromise.then(function () {
-          loggerA.log('after engine loaded');
-          registerNetworkPolicy();
-        }).then(function () {
-          registry.emitEvent('loadPrivacyOptionsDone');
-        })
-      }, 0);
-    });
-
-
-    registry.onEvent(['logout','shutdown'], function () {
-      loggerA.log('Blocker finishing');
-      unregisterNetworkPolicy();
-    });
 
     var panel = registry.resolve('panel');
     
@@ -215,10 +192,6 @@ module.exports = {
       return new Promise(function (resolve, reject) {
         return resolve(collapsedClass);
       });
-    });
-    HitChanel.init();
-    registry.onEvent('shutdown', ()=>{
-      HitChanel.destroy();
     });
 
   }

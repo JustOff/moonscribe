@@ -3,7 +3,7 @@ var registry = require('./../registry.js');
 var storage = require('./../storage.js');
 var {isProxied, isExtraSecond} = require('./../common_helpers.js');
 var logger = new (require('./logger.js'))(['main']);
-let Utils = require('./../blocker/util.js').Utils;
+let Utils = require('./util.js').Utils;
 
 // native api start here
 // https://github.com/canuckistani/jp-block-site-example
@@ -11,7 +11,6 @@ let Utils = require('./../blocker/util.js').Utils;
 const { Ci, Cu, Cc, Cr } = require('chrome');
 Cu.import('resource://gre/modules/Services.jsm');
 
-var {isUARotatorOn, getUA} = require('./uarotator.js');
 var {maybeAddCustomHeader} = require('./ownsiteheader.js');
 
 var isProxyOn = function () {
@@ -28,23 +27,6 @@ var networkObserver = {
       if (topic == 'http-on-modify-request') {
 
         var channel = subject.QueryInterface(Ci.nsIHttpChannel);
-        // var requestUrl = channel.URI.spec;
-
-        var locationForUA;
-        var domWin = Utils.getRequestWindow(subject.QueryInterface(Ci.nsIChannel));
-        if(domWin){
-          if(domWin.top){
-            locationForUA = domWin.top.location.href;
-          } else {
-            locationForUA = domWin.location.href;
-          }
-
-          if(isUARotatorOn(locationForUA)){
-            var ua = getUA();
-            channel.setRequestHeader('User-Agent', ua.trim(), false);
-            delete ua;
-          }
-        }
 
         maybeAddCustomHeader(channel);
 

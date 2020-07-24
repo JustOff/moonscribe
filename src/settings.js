@@ -11,23 +11,11 @@ var settings = {
     LNK_PSSWRD_FRGT: 'https://windscribe.com/forgotpassword',
     LNK_FRSTRUN: 'https://windscribe.com/installed/extension?user_id={user_id}'
   },
-  ASSETS_ENDPOINT: 'https://assets.windscribe.com/',
-  BACKUP_ASSETS_ENDPOINT: 'https://assets.staticnetcontent.com/',
   // default PAC endpoints should not have protocol in the beginning, it is stated in the PAC
   DEFAULT_PAC_ENDPOINT: 'nl-007.whiskergalaxy.com',
   BACKUP_DEFAULT_PAC_ENDPOINT: 'nl-004.whiskergalaxy.com',
-  SRVC: {
-   'USERAGENTS': 'https://assets.windscribe.com/extension/useragents.txt',
-   'EASYPRIVACY': 'https://assets.windscribe.com/extension/easyprivacy.txt',
-   'FANBOY': 'https://assets.windscribe.com/extension/fanboy-social.txt',
-    'EASY': "https://assets.windscribe.com/extension/easylist.txt"
-  },
   INTERVALS:{
-    SESSION_UPDATE: 60*1000,
-    USERAGENT_UPDATE: 3*24*60*60*1000,
-    EASYPRIVACY_UPDATE: 3*24*60*60*1000,
-    FANBOY_UPDATE: 3*24*60*60*1000,
-    EASY_UPDATE: 3*24*60*60*1000
+    SESSION_UPDATE: 60*1000
   },
   EXTRHDRS: [
     new RegExp('^.*\\.windscribe\\.com$', 'i'),
@@ -80,7 +68,6 @@ var settings = {
   "data_directory": "windscribe",
   "register_via_site_only": true,
   "purge_storage_for_older_versions": false,
-  "network_blocker_policy_CID": 'f3b59a60-b61d-11e5-a837-0800200c9a66',
   "WS_GRP_MIN": 1,
   "WS_GRP_MAX": 100
 };

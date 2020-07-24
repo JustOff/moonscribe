@@ -1,5 +1,5 @@
 var OriginalRequest = require("sdk/request").Request;
-var {BACKUP_ENDPOINT, ENDPOINT, ASSETS_ENDPOINT, BACKUP_ASSETS_ENDPOINT } = require('./../settings.js');
+var {BACKUP_ENDPOINT, ENDPOINT } = require('./../settings.js');
 
 
 var TryBackupException = (function() {
@@ -26,9 +26,6 @@ var replaceUrl =  function (originalUrl) {
   if(originalUrl.startsWith(ENDPOINT)){
     replaced = originalUrl.replace(ENDPOINT, BACKUP_ENDPOINT);
     // console.log('happened to replace originalUrl('+originalUrl+') to replaced('+replaced+')');
-    return replaced;
-  } else if (originalUrl.startsWith(ASSETS_ENDPOINT)) {
-    replaced = originalUrl.replace(ASSETS_ENDPOINT, BACKUP_ASSETS_ENDPOINT);
     return replaced;
   } else {
     // console.log('replace url called but not worked: originalUrl('+originalUrl+')');

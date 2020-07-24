@@ -19,14 +19,6 @@ var isRestartRequired = function (loadReason) {
   if(loadReason == 'downgrade' || loadReason == 'upgrade'){
     return true;
   }
-  // this also could be a case when user first uninstall extension, and then install it once again
-  // the best way to detect this is checking ff internal memory, that is not cleaned by mistake in previous version during uninstall
-  // this also cover re- "enable" reason
-  let registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
-  if(registrar.isCIDRegistered(components.ID(settings.network_blocker_policy_CID))){
-    console.log('restart required because old memory');
-    return true;
-  }
   return false;
 };
 

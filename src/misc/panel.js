@@ -144,33 +144,6 @@ module.exports = {
       }, 0);
     });
 
-    panel.port.on('whitelist_report', function() {
-      return new Promise(function (resolve, reject) {
-        try {
-          var content = getWithSessionedSigning({});
-          content.rep_url = getCurrentUrl();
-        } catch (e) {
-          return reject('we are not query whitelist report if there is no session');
-        }
-
-        Request({
-          url: getEndpoint("/Report/whitelist"),
-          content: content,
-          onComplete: function (response) {
-            if (isNoInternetErrorCode(response)) {
-              if(!response.isBackup){
-                throw new TryBackupException();
-              }
-              return;
-            }
-            loggerB.log('POST to whitelist report');
-            panel.port.emit('whitelist_report_done');
-            resolve(response);
-          }
-        }).post();
-      });
-    });
-
     // Generate class identifier used to collapse nodes and register
     // corresponding stylesheet.
     let collapsedClass = "";

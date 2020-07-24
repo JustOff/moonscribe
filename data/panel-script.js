@@ -154,7 +154,6 @@ try{
               gE('#whiteListBtns').addClass('hidden');
               gE('#deleteBtns').removeClass('hidden');
               // btn = 'Remove Site from Whitelist';
-              gE('#whiteList_report').textContent = 'Report this. URL so we can fix it?';
             } else if(isNOTInTheList) {
               gE('#whiteList_label').style.fontSize='17px';
               if(mess && mess == 'removed'){
@@ -165,15 +164,12 @@ try{
               }
               gE('#whiteListBtns').removeClass('hidden');
               gE('#deleteBtns').addClass('hidden');
-              gE('#whiteList_report').textContent = '';
             } else if(isWrongSite){
               gE('#whiteList_label').style.fontSize='15px';
               gE('#whiteList_label').textContent = 'Current site is invalid, cannon be whitelisted';
               gE('#whiteListBtns').addClass('hidden');
               gE('#deleteBtns').addClass('hidden');
             }
-
-            gE('#whiteList_report').style.textDecoration = "underline";
 
           }
           break;
@@ -1171,17 +1167,8 @@ try{
 
   });
 
-  gE('#whiteList_report').on('click', function(){
-    self.port.emit('whitelist_report');
-  });
-
   gE('#restart_now').on('click', function () {
     self.port.emit('restart_now');
-  });
-
-  self.port.on('whitelist_report_done', function () {
-    gE('#whiteList_report').textContent = "Thanks. We'll get that fixed shortly.";
-    gE('#whiteList_report').style.textDecoration = "none";
   });
 
   function renderWhiteList(whiteList){

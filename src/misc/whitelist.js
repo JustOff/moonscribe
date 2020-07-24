@@ -24,6 +24,9 @@ var maybeInit = function () {
 var Whitelist = {};
 
 Whitelist.getBaseDomain = function (site) {
+  if (site.indexOf('://') === -1) {
+    return site;
+  }
   let uri = Utils.makeURI(site);
   if(uri == null){
     uri = site;

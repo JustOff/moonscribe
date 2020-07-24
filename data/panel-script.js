@@ -149,7 +149,7 @@ try{
                 gE('body').setAttribute('wl_mess', mess);
                 gE('#whiteList_label').textContent = 'This Site is Whitelisted';
               } else {
-                gE('#whiteList_label').textContent = 'Resume blocking trackers on this site?';
+                gE('#whiteList_label').textContent = 'Resume using Proxy for this site?';
               }
               gE('#whiteListBtns').addClass('hidden');
               gE('#deleteBtns').removeClass('hidden');
@@ -160,7 +160,7 @@ try{
                 gE('body').setAttribute('wl_mess', mess);
                 gE('#whiteList_label').textContent = 'Site removed from Whitelist';
               } else {
-                gE('#whiteList_label').textContent = 'Stop Blocking Trackers on this Site?';
+                gE('#whiteList_label').textContent = 'Stop using Proxy for this Site?';
               }
               gE('#whiteListBtns').removeClass('hidden');
               gE('#deleteBtns').addClass('hidden');
@@ -1001,22 +1001,6 @@ try{
       self.port.emit('easySwitch', newState);
     });
 
-  var addCurrentToAdsOnly = function () {
-    gE('body').addClass('wait');
-    var currentSite = gE('#whiteList').getAttribute('data-site');
-    gE('#white_list').setAttribute('mod', 'main');
-    self.port.emit('change_site_whitelisted', {
-      toBeAdded: true,
-      site:currentSite,
-      isOpenedFromOptions: false,
-      currentSite: currentSite,
-      mess: 'added'
-    });
-  };
-  // ads only
-  gE('#whiteListAds').once('click', addCurrentToAdsOnly);
-  gE('#whiteListAdsBtn').once('click', addCurrentToAdsOnly);
-
   var addCurrentToAdsAndProxy = function () {
     gE('body').addClass('wait');
     var currentSite = gE('#whiteList').getAttribute('data-site');
@@ -1031,8 +1015,6 @@ try{
     });
   };
 
-  // ads+proxy
-  gE('#whiteListProxy').once('click', addCurrentToAdsAndProxy);
   gE('#whiteListProxyBtn').once('click', addCurrentToAdsAndProxy);
 
   gE('#deleteBtn').once('click', function () {
@@ -1079,41 +1061,6 @@ try{
       gE('#whiteList').setAttribute('data-state', WL_WRONG_SITE);
     }
 
-
-    var removeMouseOverListeners = function () {
-      gE('#whiteList').off('mouseover');
-      gE('#whiteList').off('mouseout');
-      gE('#whiteListDetails').off('mouseover');
-      gE('#whiteListDetails').off('mouseout');
-
-      gE('#whiteListProxy').off('mouseover');
-      gE('#whiteListProxy').off('mouseout');
-      gE('#whiteListAds').off('mouseover');
-      gE('#whiteListAds').off('mouseout');
-    };
-
-    var addMouseOverListners = function () {
-      var showDetails = function () {
-        gE('#whiteList').addClass('hidden');
-        gE('#whiteListDetails').removeClass('hidden');
-      };
-      var hideDetails = function () {
-        gE('#whiteList').removeClass('hidden');
-        gE('#whiteListDetails').addClass('hidden');
-      };
-
-      gE('#whiteListDetails').once('mouseover', showDetails);
-      gE('#whiteListDetails').once('mouseout', hideDetails);
-      gE('#whiteList').once('mouseover', showDetails);
-      gE('#whiteList').once('mouseout', hideDetails);
-
-      gE('#whiteListProxy').once('mouseover', () => gE('#whiteListDetails').addClass('whiteHighlight'));
-      gE('#whiteListProxy').once('mouseout',  () => gE('#whiteListDetails').removeClass('whiteHighlight'));
-
-      gE('#whiteListAds').once('mouseover', () => gE('#whiteListAds').addClass('whiteHighlight'));
-      gE('#whiteListAds').once('mouseout',  () => gE('#whiteListAds').removeClass('whiteHighlight'));
-    };
-    
     if(whitelisted.valid){
       if(whitelisted.isWhiteListed){
         //noinspection SpellCheckingInspection
@@ -1132,12 +1079,10 @@ try{
         });
         //noinspection SpellCheckingInspection
         gE('#whiteListIndicator-mainScreen').textContent = 'This site is whitelisted';
-        removeMouseOverListeners();
       } else {
 
         //noinspection SpellCheckingInspection
         gE('#whiteListBtnText').textContent = 'Whitelist it';
-        gE('#whiteListBtnText').off('click');
         gE('#whiteListIndicator-mainScreen').textContent = 'Having Issues with this site?';
 
         var currentSite  = gE('#whiteList').getAttribute('data-site');
@@ -1150,10 +1095,10 @@ try{
           }
         }
         if(isSiteValidClientCheck){
-          addMouseOverListners();
+          gE('#whiteListBtnText').once('click', addCurrentToAdsAndProxy);
         } else {
           // client side checking
-          removeMouseOverListeners();
+          gE('#whiteListBtnText').off('click');
           gE('#whiteList').setAttribute("data-tooltip", "Cannot add empty page to whitelist");
         }
       }
@@ -1161,7 +1106,6 @@ try{
     } else {
       // bg script checking
 
-      removeMouseOverListeners();
       gE('#whiteList').setAttribute("data-tooltip", "Cannot add empty page to whitelist");
     }
 
@@ -1182,14 +1126,7 @@ try{
         var removeBtn = document.createElement('span');
         whiteListItem.className = 'whiteList-item';
         itemName.className = 'whiteList-item-name';
-        if(('adsOnly' in wlItem ) && (wlItem.adsOnly === false)){
-          itemName.appendChild(jsonToDOM([
-            ['span', {style:"color:#ff6478"},[null, {}, 'No proxy:']],
-            [null, {}, item]]
-          , document, {}));
-        } else {
-          itemName.textContent = item;  
-        }
+        itemName.textContent = item;
         removeBtn.id = item;
         removeBtn.textContent = "Remove";
         removeBtn.className = 'whiteList-item-remove';

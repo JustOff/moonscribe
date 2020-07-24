@@ -1234,12 +1234,6 @@ a {
     border: none;
 }
 
-.whiteListOptionsBtns{
-    width: 45%;
-    font-size: 13px;
-    padding: 0 0 0 0;
-}
-
 #whiteListDetails div{
     cursor: pointer;
 }
@@ -1254,8 +1248,4 @@ input[type="button"]{
 }
 input[type="button"]::-moz-focus-inner {
     border: 0;
-}
-
-.whiteHighlight{
-    background-color:rgba(255, 255, 255, 0.3);
 }

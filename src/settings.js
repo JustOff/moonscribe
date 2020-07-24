@@ -8,7 +8,7 @@ var settings = {
     LNK_HLP: 'https://windscribe.com/help',
     LNK_UPGRD: 'https://windscribe.com/upgrade',
     LNK_PSSWRD_FRGT: 'https://windscribe.com/forgotpassword',
-    LNK_FRSTRUN: 'https://windscribe.com/installed/extension?user_id={user_id}'
+    LNK_SIGNUP: 'https://windscribe.com/signup?ws_ext'
   },
   // default PAC endpoints should not have protocol in the beginning, it is stated in the PAC
   DEFAULT_PAC_ENDPOINT: 'nl-007.whiskergalaxy.com',
@@ -22,12 +22,6 @@ var settings = {
     new RegExp('^.*\\.windscribe\\.com$', 'i'),
     new RegExp('^windscribe\\.com$', 'i')
   ],
-  EXTERNAL_LOGIN_LOCATION_REGEXP: /https:\/\/(.*)windscribe\.com\/myaccount\?hello/,
-
-  // replace with this for production
-  // EXTERNAL_LOGIN_URL_OPEN_ON_INSTALL: 'https://windscribe.com/signup?ws_ext',
-  EXTERNAL_LOGIN_URL_OPEN_ON_INSTALL: 'https://windscribe.com/signup?ws_ext',
-  EXTERNAL_URL_OPEN_ON_UNINSTALL: 'https://windscribe.com/uninstall/extension',
   KNOWN_FLAGS: [
     "AD.png", "AE.png", "AF.png", "AG.png", "AI.png", "AL.png", "AM.png", "AN.png", "AO.png",
     "AQ.png", "AR.png", "AS.png", "AT.png", "AU.png", "AW.png", "AX.png", "AZ.png", "BA.png",

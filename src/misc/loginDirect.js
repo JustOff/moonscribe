@@ -113,7 +113,6 @@ var postGetSessionSuccess = function (response, mode) {
   var flow = Promise.resolve();
 
   flow = flow.then(function () {
-    storage.setJSON('isNotFirstRun', true);
     var resp = response.json;
     logger.log(('user login(success):' + response.text).split('\n').join(' '));
     rData = resp.data;
@@ -126,9 +125,6 @@ var postGetSessionSuccess = function (response, mode) {
 
 
   flow = flow.then(function () {
-    if(mode=='login'){
-      registry.emitEvent('postLoginSuccess', rData['user_id']);
-    }
     handleTrafficStatus();
     registry.emitEvent('loginWithStoredCredentials', true);
   });

@@ -167,12 +167,7 @@ var initModules = function (panel, loadReason) {
 
   try{ require('./src/misc/panel.js').init(); } catch (e){ logger.error('error during init of /src/misc/panel.js', e); }
 
-  try{ require('./src/misc/firstRun.js').init(); } catch (e){ logger.error('error during init of /src/misc/firstRun.js', e); }
-
   try{ require('./src/misc/checkMode.js').init(); } catch (e){ logger.error('error during init of /src/misc/checkMode.js', e); }
-
-  try{ require('./src/misc/siteRegistration.js').init(loadReason); } catch (e){ logger.error('error during init of /src/misc/siteRegistration.js', e); }
-
 
   var windscribe = new Windscribe(panel);
 
@@ -220,10 +215,6 @@ exports.onUnload = function (reason) {
       } catch (e){ console.log('turningOffProxy error ', e)}
     }
     unregisterNetworkListener();
-
-    if (reason == "uninstall") {
-      tabs.open(settings.EXTERNAL_URL_OPEN_ON_UNINSTALL);
-    }
 
     registry.emitEvent('shutdown');
 };

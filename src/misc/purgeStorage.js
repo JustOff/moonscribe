@@ -38,10 +38,7 @@ var purgeStorageOnLogOut = function(){
 
 var purgeStorageOnUninstall = function () {
   purgeStorageOnLogOut();
-  storage.reset('isNotFirstRun');
   storage.reset('location_cache');
-  storage.reset('knownUsers');
-  storage.reset('reportInstall');
   storage.reset('cachedUAList'); // todo: fix tihs
   storage.reset('version');
   storage.reset('ext_username');

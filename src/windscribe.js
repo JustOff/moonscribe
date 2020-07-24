@@ -54,64 +54,6 @@ var Windscribe = function (panel/* */) {
 
 
 
-
-    //signUp
-    me.panel.port.on('action_user_signUp', function (data) {
-      logger.log('action_user_signUp event with:' + data);
-      var content = getWithBasicSigning({
-        username: data.name,
-        password: data.passw,
-        session_type_id: '2',
-        reg_method:'ext_firefox'
-      });
-
-      if (data.email) {
-        content.email = data.email;
-      }
-
-      Request({
-        url: getEndpoint("Users"),
-        content: content,
-        onComplete: function (response) {
-          if (isNoInternetErrorCode(response)) {
-            if(!response.isBackup){
-              throw new TryBackupException();
-            }
-            me.panel.port.emit('signup_error', 'No internet connection.');
-            return;
-          }
-          var resp = response.json;
-          if (resp.errorCode) {
-            registry.emitEvent('signUpError', resp);
-          } else {
-            registry.emitEvent('signUpSuccess', resp.data.user_id);
-            registry.emitEvent('login', {name: data.name, passw: data.passw, signup: true});
-          }
-        }
-      }).post();
-    });
-
-    registry.onEvent('signUpError', function (resp) {
-
-      if(resp && resp.errorMessage) {
-          me.panel.port.emit('signup_error', resp.errorMessage);
-      } else {
-          // no loader - no need to switch UI
-          if (resp.errorCode == 503) {
-              me.panel.port.emit('signup_error', 'Username is already taken.');
-          } else if (resp.errorCode == 600) {
-              me.panel.port.emit('signup_error', 'Testing duplicate error.');
-          } else if (resp.errorCode == 502) {
-              var mess = getValidationMessage(resp);
-              me.panel.port.emit('signup_error', mess);
-          } else {
-              me.panel.port.emit('signup_error', 'Unknown error, try again later.');
-          }
-      }
-    });
-
-
-
     //logout
     me.panel.port.on('action_user_logout', function () {
       me.logout(); //
@@ -145,7 +87,7 @@ var Windscribe = function (panel/* */) {
     });
 
     me.panel.port.on('signup_via_site', function () {
-      tabs.open(settings.EXTERNAL_LOGIN_URL_OPEN_ON_INSTALL);
+      tabs.open(settings.LNK.LNK_SIGNUP);
       me.panel.hide();
     });
 

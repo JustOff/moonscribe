@@ -20,6 +20,10 @@ let {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
 module.exports = {
   init: function () {
 
+    if(!storage.has('whitelist')) {
+      storage.setJSON('whitelist', settings.whitelistDefault);
+    }
+
     var panel = registry.resolve('panel');
     
     panel.port.on('whitelist_init', function(){

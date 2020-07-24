@@ -2,6 +2,7 @@ var WL_WRONG_SITE          = 'E';
 var WL_REMOVED             = '0';
 var WL_ADDED               = '1';
 var WL_ADDED_PLUS_NO_PROXY = '2';
+var LNK_UPGRD = '';
 
 
 window.addEventListener('load', function () {
@@ -451,7 +452,7 @@ try{
 
 
         var onClickUpgrade = function (){
-          self.port.emit('open_new_url', lnkData.LNK_UPGRD);
+          self.port.emit('open_new_url', LNK_UPGRD);
         };
 
         self.port.on('main_traffic_left', function(traffic){
@@ -538,6 +539,8 @@ try{
       gE('#upgrade_menu').on('click', function(){
         self.port.emit('open_new_url', lnkData.LNK_UPGRD);
       });
+
+      LNK_UPGRD = lnkData.LNK_UPGRD;
 
       gE('#login-footer-passw').on('click', function(){
         self.port.emit('open_new_url', lnkData.LNK_PSSWRD_FRGT);

@@ -1,0 +1,4 @@
+*.tmp
+*.xpi
+bootstrap.js
+install.rdf

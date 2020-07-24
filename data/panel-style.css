@@ -620,7 +620,7 @@ a {
 .userStatus{
     border: 2px solid rgba(255, 255, 255, 0.29);
     height: 30px;
-    width: 95px;
+    width: 105px;
     border-radius: 30px;
     float: right;
     top: 10px;
@@ -714,6 +714,7 @@ a {
 .userStatus-text{
     display: inline-block;
     margin-left: 5px;
+    margin-right: 5px;
     margin-top: 6px;
     font-size: 14px;
     font-weight: bold;

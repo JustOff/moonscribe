@@ -375,6 +375,11 @@ try{
                 return PAC_locations.includes(item.short_name)
               });
             } */
+            if ( storage.get('is_premium') == 0 ) {
+              result = result.filter(function (item) {
+                return item.premium_only == 0;
+              });
+            }
             clbck.success(result, resetLocations );
           }
         }

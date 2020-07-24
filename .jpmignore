@@ -1,5 +1,8 @@
 .*
 *.tmp
 *.xpi
+*.exe
 *.md
 LICENSE
+release.cmd
+update.xml

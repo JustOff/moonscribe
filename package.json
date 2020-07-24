@@ -5,6 +5,7 @@
   "version": "1.0.1",
   "description": "Unofficial Windscribe Proxy Client for Pale Moon",
   "homepage": "https://github.com/JustOff/moonscribe",
+  "updateURL": "https://raw.githubusercontent.com/JustOff/moonscribe/master/update.xml",
   "main": "index.js",
   "author": "Off JustOff <Off.Just.Off@gmail.com>",
   "contributors": [

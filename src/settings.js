@@ -56,9 +56,8 @@ var settings = {
     "_somaliland.png", "_south-ossetia.png", "_united-nations.png", "_unknown.png", "_wales.png"
   ],
   "whitelistschemes": "about chrome file irc moz-safe-about news resource snews x-jsd addbook cid imap mailbox nntp pop data javascript moz-icon",
-  "whitelistDefault": [{url:"windscribe.com"}],
+  "whitelistDefault": [{"url":"windscribe.com"},{"url":"palemoon.org"}],
   "slinks_protocols": ['http', 'https', 'mailbox', 'imap', 'news', 'snews'],
-  "data_directory": "windscribe",
   "purge_storage_for_older_versions": false,
   "WS_GRP_MIN": 1,
   "WS_GRP_MAX": 100

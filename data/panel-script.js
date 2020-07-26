@@ -566,7 +566,6 @@ try{
       site: currentSite,
       isOpenedFromOptions: false,
       currentSite:currentSite,
-      isWithProxy: true,
       mess: 'added'
     });
   };

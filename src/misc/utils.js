@@ -2,7 +2,7 @@ var md5 = require('../md5.js').md5;
 var storage = require('../storage.js');
 var registry = require("../registry.js");
 var settings = require('../settings.js');
-var logger = new (require('./../misc/logger.js'))(['main']);
+var logger = new (require('./logger.js'))(['main']);
 var Whitelist = require('./whitelist.js');
 var OLD_PAC;
 
@@ -73,9 +73,7 @@ var validResponceWithCredentials = function (response) {
 
 try{
     var refillPACWhitelist = function (PAC) {
-        var listForPAC = Whitelist.getList().filter(function (el) {
-            return ('adsOnly' in el) && (el.adsOnly == false);
-        }).map(function (el) {
+        var listForPAC = Whitelist.getList().map(function (el) {
             return ['*.'+el.url+'/*', '*//'+el.url+'/*'];
         }).reduce(function (collect, current) {
             collect.push(current[0]);
@@ -83,6 +81,8 @@ try{
             return collect;
         }, []);
         PAC = PAC.replace(/(.*whitelist = )(.*?)(;.*)/mg, '$1' + JSON.stringify(listForPAC) + '$3');
+        PAC = PAC.replace(/(.*)(shExpMatch\(url, whitelist\[i\]\).*)/mg,
+            '$1' + 'url != "' + settings.CHECK_IPV4_URL + '" && url != "' + settings.CHECK_NOSSL_URL + '" && $2');
         return PAC;
     };
 } catch (e){

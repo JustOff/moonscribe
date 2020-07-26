@@ -40,7 +40,7 @@ Whitelist.getBaseDomain = function (site) {
   }
 };
 
-Whitelist.isWhitelisted = function (url, adsOnly = true) {
+Whitelist.isWhitelisted = function (url) {
   maybeInit();
 
   var list = storage.getJSON('whitelist');
@@ -53,20 +53,14 @@ Whitelist.isWhitelisted = function (url, adsOnly = true) {
   }
 
   var itemIndex = list.findIndex(function (el) {
-    if (adsOnly) {
-      var one = (el.url == baseDomain && ((typeof el.adsOnly === 'undefined') || (el.adsOnly === true)));
-      // console.log('el.url == baseDomain:'+(el.url == baseDomain)+", typeof el.adsOnly === 'undefined'):"+(typeof el.adsOnly === 'undefined')+', el.adsOnly === true:'+(el.adsOnly === true));
-      return one;
-    } else {
-      return el.url == baseDomain;
-    }
+    return el.url == baseDomain;
   });
   var res = itemIndex > -1;
   // console.log('itemIndex: '+itemIndex+', list:'+ JSON.stringify(list)+', isWhitelisted:'+res);
   return  res;
 };
 
-Whitelist.addSite = function (site, adsOnly = true) {
+Whitelist.addSite = function (site) {
   maybeInit();
   var baseDomain;
   try {
@@ -76,14 +70,11 @@ Whitelist.addSite = function (site, adsOnly = true) {
   }
   Whitelist.removeSite(baseDomain);
   var list = storage.getJSON('whitelist');
-  var item = {url: baseDomain, adsOnly: adsOnly};
+  var item = {url: baseDomain};
   list.push(item);
   storage.setJSON('whitelist', list);
 
-  // work with PAC
-  if(!adsOnly){
-    refreshPackFile();
-  }
+  refreshPackFile();
 };
 
 Whitelist.removeSite = function (site) {

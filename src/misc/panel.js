@@ -20,10 +20,6 @@ let {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
 module.exports = {
   init: function () {
 
-    if(!storage.has('whitelist')) {
-      storage.setJSON('whitelist', settings.whitelistDefault);
-    }
-
     var panel = registry.resolve('panel');
     
     panel.port.on('whitelist_init', function(){
@@ -41,7 +37,7 @@ module.exports = {
      * state - true if we adding it to list, otherwise false
      */
     panel.port.on('change_site_whitelisted', function (options) {
-      var {toBeAdded, site, isOpenedFromOptions, currentSite, isWithProxy = false, mess} = options;
+      var {toBeAdded, site, isOpenedFromOptions, currentSite, mess} = options;
       
       loggerB.log('change_site_whitelisted called with: toBeAdded:'+toBeAdded+', site'+site);
 
@@ -64,11 +60,7 @@ module.exports = {
 
 
       if(toBeAdded){
-        if(isWithProxy){
-          Whitelist.addSite(site, false);
-        } else {
-          Whitelist.addSite(site);
-        }
+        Whitelist.addSite(site);
       } else {
         Whitelist.removeSite(site);
       }
@@ -85,7 +77,7 @@ module.exports = {
       try{
         var currentSiteBaseDomain = Whitelist.getBaseDomain(currentSite);
         isCurr = (currentSiteBaseDomain === baseDomain);
-        isCurWL = Whitelist.isWhitelisted(currentSiteBaseDomain, false) ? WL_ADDED : WL_REMOVED;
+        isCurWL = Whitelist.isWhitelisted(currentSiteBaseDomain) ? WL_ADDED : WL_REMOVED;
       } catch (e){
         isCurWL = WL_WRONG_SITE;
       }
@@ -118,11 +110,7 @@ module.exports = {
         return;
       }
 
-      // Ads Only + No Proxy
-      // &&
-      // Ads Only
-
-      var whitelisted = Whitelist.isWhitelisted(baseDomain, false);
+      var whitelisted = Whitelist.isWhitelisted(baseDomain);
       // console.log('returning to UI baseDomain:'+baseDomain+', whitelisted:'+whitelisted);
       panel.port.emit('check_site_whitelisted_done', {valid: true, isWhiteListed: whitelisted});
     });

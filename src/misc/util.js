@@ -199,6 +199,17 @@ XPCOMUtils.defineLazyServiceGetter(Utils, "netUtils", "@mozilla.org/network/util
 XPCOMUtils.defineLazyServiceGetter(Utils, "styleService", "@mozilla.org/content/style-sheet-service;1", "nsIStyleSheetService");
 XPCOMUtils.defineLazyServiceGetter(Utils, "systemPrincipal", "@mozilla.org/systemprincipal;1", "nsIPrincipal");
 
+Utils.getBaseDomainFromHost = function (host) {
+  try
+  {
+    return Utils.effectiveTLD.getBaseDomainFromHost(host);
+  }
+  catch(e)
+  {
+    return null;
+  }
+};
+
 /**
  * Extracts the hostname from a URL (might return null).
  */

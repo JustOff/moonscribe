@@ -34,9 +34,9 @@ Whitelist.getBaseDomain = function (site) {
   var unwrapped = Utils.unwrapURL(uri);
   if(unwrapped != null){
     let host = Utils.unwrapURL(uri).host;
-    return Utils.effectiveTLD.getBaseDomainFromHost(host);
+    return Utils.getBaseDomainFromHost(host);
   } else {
-    return Utils.effectiveTLD.getBaseDomainFromHost(site);
+    return Utils.getBaseDomainFromHost(site);
   }
 };
 

@@ -2,7 +2,7 @@
   "title": "Moonscribe",
   "id": "Moonscribe@Off.JustOff",
   "name": "moonscribe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Unofficial Windscribe Proxy Client for Pale Moon",
   "homepage": "https://github.com/JustOff/moonscribe",
   "updateURL": "https://raw.githubusercontent.com/JustOff/moonscribe/master/update.xml",

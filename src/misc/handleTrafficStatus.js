@@ -32,16 +32,28 @@ function handleTrafficStatus(){
       var proxyStateBeforeExpiration = storage.get('proxyStateBeforeExpiration');
       storage.reset('proxyStateBeforeExpiration');
       if(proxyStateBeforeExpiration === 1){
+        if (typeof turnOnProxy != "function"){
+          turnOnProxy = require('./../common_helpers.js').turnOnProxy;
+        }
         turnOnProxy(true);
       }
     }
   } else if(status == 2){  // subscription ends
+    if (typeof isProxied != "function"){
+      isProxied = require('./../common_helpers.js').isProxied;
+    }
     storage.set('proxyStateBeforeExpiration', isProxied()?1:0);
     panel.port.emit('main_traffic_ends');
+    if (typeof turnOffProxy != "function"){
+      turnOffProxy = require('./../common_helpers.js').turnOffProxy;
+    }
     turnOffProxy(panel, true);
     storage.reset('ext_username');
   } else if(status == 3){ // premium can be banned too
     panel.port.emit('main_traffic_banned');
+    if (typeof turnOffProxy != "function"){
+      turnOffProxy = require('./../common_helpers.js').turnOffProxy;
+    }
     turnOffProxy(panel, true);
   }
 

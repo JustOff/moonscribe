@@ -1,5 +1,5 @@
 @echo off
-set VER=1.0.4
+set VER=1.0.5
 
 sed -i -b -E "s/\"version\": \".+?\"/\"version\": \"%VER%\"/" package.json
 sed -i -b -E "s/version>.+?</version>%VER%</; s/download\/.+?\/moonscribe-.+?\.xpi/download\/%VER%\/moonscribe-%VER%\.xpi/" update.xml

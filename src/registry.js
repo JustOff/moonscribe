@@ -17,7 +17,7 @@ registry.resolve = function(name){
   if(name in registry.store){
     return registry.store[name];
   }
-  throw new Error('There is no such ite, in registry:'+name);
+  throw new Error('There is no such item in registry:'+name);
 };
 
 

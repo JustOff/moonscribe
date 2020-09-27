@@ -567,7 +567,7 @@ var createTryablePromise = function (promiseFactory, tryes, delay, verbose) {
 try{
   var setDefaultPac = function () {
     if (isProxied()) {
-      var url = registry.resolve('defaultPacUrl');
+      var url = registry.has('defaultPacUrl') ? registry.resolve('defaultPacUrl') : settings.DEFAULT_PAC_ENDPOINT;
       var pacScript = `function FindProxyForURL(url, host) {
                     if (isPlainHostName(host) ||  shExpMatch(host, "*.local") || shExpMatch(host, "*.int") || shExpMatch(url, "*://api.windscribe.com/*"))
                         return "DIRECT";

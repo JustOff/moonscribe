@@ -1,4 +1,4 @@
-## Moonscribe
+### [<sub>⬇</sub> Moonscribe](https://github.com/JustOff/moonscribe/releases)
 
 [Moonscribe](https://github.com/JustOff/moonscribe/releases) is an unofficial [Windscribe](https://windscribe.com/) extension for [Pale Moon](https://www.palemoon.org/).
 
